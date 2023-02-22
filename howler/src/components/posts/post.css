@@ -1,0 +1,35 @@
+.posts {
+    padding: 1rem 1rem 1rem 1rem;
+}
+
+.post p {
+    color: rgb(90, 83, 83);
+}
+.post {
+    height: fit-content;
+    width: 300px;
+    padding: 1rem 1rem 1rem 1rem;
+    margin-right: 1rem;
+    margin-top: 1rem;
+    border-radius: 10px;
+    position: relative;
+    align-self: center;
+    
+}
+
+.post:hover {
+    box-shadow: 0 0 11px rgba(33,33,33,.2); 
+  }
+.category {
+    color: rgb(183, 66, 238);
+}
+
+.title {
+    color: black !important;
+    font-size: 20px;
+}
+
+.prev-img {
+    width: 100%;
+    align-self: center;
+}

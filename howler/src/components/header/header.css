@@ -1,0 +1,26 @@
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1rem 50rem 1rem 1rem;
+    border-bottom: 1px solid rgb(105, 99, 99);
+    align-items: center;
+    height: 20px;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background-color: white;
+  }
+
+
+  
+.row-center {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.icon-text {
+    color:rgb(187, 18, 209)
+}

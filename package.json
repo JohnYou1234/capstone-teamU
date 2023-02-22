@@ -1,0 +1,25 @@
+{
+  "name": "capstone-teamu",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JohnYou1234/capstone-teamU.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JohnYou1234/capstone-teamU/issues"
+  },
+  "type": "module",
+  "homepage": "https://github.com/JohnYou1234/capstone-teamU#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^2.0.20"
+  }
+}
