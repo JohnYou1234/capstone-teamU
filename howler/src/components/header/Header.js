@@ -1,18 +1,37 @@
-import { VscListFlat } from "react-icons/vsc";
-import { AiOutlineHome, AiOutlineFilter } from "react-icons/ai";
-import { MdOutlineCreate } from "react-icons/md";
+import React from 'react';
+import { Navbar, Nav, Container } from 'react-bootstrap';
+import './header.css';
+import {useState} from 'react';
+import BoardList from './BoardList.js';
 
-import './header.css'
-function Header () {
+function Header() {
+  const [showList, setShowList] = useState(false);
+  const closeList = () => setShowList(false);
+  const openList = () => setShowList(true);
   return (
-      <header className="header">
-        <h2>Howler</h2>
-        <div className="row-center"><AiOutlineHome /><p className="icon-text"> Home</p></div>
-        <div className="row-center"><MdOutlineCreate /><p className="icon-text">Post</p></div>
-        <div className="row-center"><AiOutlineFilter /><p className="icon-text">Filter</p></div>
-        <div style={{ float: 'right', paddingRight: 20 }} className="row-center"><VscListFlat/><p className="icon-text">Boards</p></div>
-      </header>
+    <>
+      <Navbar variant="dark" expand="lg" className='custom-nav'>
+        <Container>
+          <Navbar.Brand href="/">Howler</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="ml-auto">
+              <Nav.Item>
+                <a onClick={() => { console.log('hi'); openList()}} className="nav-link">Boards</a>
+              </Nav.Item>
+              <Nav.Item>
+                <a href="/about" className="nav-link">Search</a>
+              </Nav.Item>
+              <Nav.Item>
+                <a href="/contact" className="nav-link">Create</a>
+              </Nav.Item>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+      <BoardList showList={showList} handleClose={closeList} handleOpen={openList}/>
+    </>
   );
-}
+};
 
 export default Header;
