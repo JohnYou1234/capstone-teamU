@@ -17,7 +17,7 @@ function Header() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto">
               <Nav.Item>
-                <a onClick={() => { console.log('hi'); openList()}} className="nav-link">Boards</a>
+                <a onClick={() => { openList()}} className="nav-link">Boards</a>
               </Nav.Item>
               <Nav.Item>
                 <a href="/about" className="nav-link">Search</a>
