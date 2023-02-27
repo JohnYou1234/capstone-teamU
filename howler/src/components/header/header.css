@@ -2,8 +2,13 @@
     background-color: rgb(166, 121, 202);
 }
 
-.board-list p:hover {
+.boardList p:hover {
     transform: scale(1.02);
     transition: transform 0.3s ease-in-out;
     box-shadow: 0px 0px 10px rgba(134, 62, 194, 0.3);
-  }
+}
+
+.boardFilterBar {
+    margin-bottom: 1rem;
+    width: 100%;
+}
