@@ -1,12 +1,11 @@
 import Header from './components/header/Header';
 import Posts from './components/posts/Posts';
-import { Routes, Route, BrowserRouter} from "react-router-dom";
-
+import { Routes, Route} from "react-router-dom";
+import Create from './components/create/Create.js';
 function App() {
   return (
     <div className="App">
-      <Header />
-      <BrowserRouter>
+        <Header />
         <Routes>
             <Route path='/' element={
               <>
@@ -17,11 +16,10 @@ function App() {
               </>
             }/>
             <Route path="search" element={<p>Search !</p>} />
-            <Route path="create" element={<p>create !</p>} />
+            <Route path="create" element={<Create />} />
             <Route path="/*" element={<p>Nothing here... </p>} />
 
         </Routes>
-      </BrowserRouter>
     </div>
   );
 }

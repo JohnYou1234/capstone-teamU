@@ -1,0 +1,69 @@
+.create-post-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .create-post-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .create-post-input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .create-post-button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #FFA500;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .create-post-button:hover {
+    background-color:#c9ac07d2;
+  }
+  
+  .create-post-tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .create-post-tab {
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    color: #333;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 10px;
+    border: none;
+  }
+  
+  .create-post-tab:hover {
+    background-color: #e6e6e6;
+  }
+  
+  .create-post-tab.active {
+    background-color: #9B59B6;
+    color: #fff;
+  }
+  
+  .create-post-tab.active:hover {
+    background-color: #8E44AD;
+  }
