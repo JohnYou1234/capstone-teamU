@@ -20,10 +20,10 @@ function Header() {
                 <a onClick={() => { openList()}} className="nav-link">Boards</a>
               </Nav.Item>
               <Nav.Item>
-                <a href="/about" className="nav-link">Search</a>
+                <a href="/search" className="nav-link">Search</a>
               </Nav.Item>
               <Nav.Item>
-                <a href="/contact" className="nav-link">Create</a>
+                <a href="/create" className="nav-link">Create</a>
               </Nav.Item>
             </Nav>
           </Navbar.Collapse>
