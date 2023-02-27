@@ -17,7 +17,7 @@ function Header() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto">
               <Nav.Item>
-                <a onClick={() => { openList()}} className="nav-link">Boards</a>
+                <text onClick={() => { openList()}} className="nav-link">Boards</text>
               </Nav.Item>
               <Nav.Item className='d-flex align-items-center'>
               {/* found this on codepen  https://codepen.io/kmuenster/pen/XWWeQGw*/}
