@@ -1,5 +1,5 @@
 import { Modal, Button, Form } from 'react-bootstrap';
-
+import './BoardList.css';
 function CreateBoard(props) {
     const handleClose = props.handleClose;
     const show = props.show;

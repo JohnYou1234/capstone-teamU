@@ -1,69 +1,95 @@
 .create-post-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #fff;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .create-post-title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  .create-post-input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border: none;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.create-post-title {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #444;
+  text-align: center;
+}
+
+.create-post-input {
+  padding: 16px;
+  border-radius: 5px;
+  width: 100%;
+  margin-bottom: 24px;
+  font-size: 16px;
+  background-color: #f7f7f7;
+  color: #444;
+}
+
+.create-post-input::placeholder {
+  color: #999;
+}
+
+.create-post-button {
+  padding: 14px 28px;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.create-post-button, .create-post-tab.active {
+  background-color: rgb(166, 121, 202);
+}
+.create-post-button:hover, .create-post-tab.active:hover{
+  background-color: rgb(205, 172, 231);
+}
+
+.create-post-tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+
+.create-post-tab {
+  padding: 14px 28px;
+  border-radius: 5px;
+  background-color: #f1f2f6;
+  color: #444;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-right: 10px;
+  border: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.create-post-tab:hover {
+  background-color: #dfe4ea;
+}
+
+.create-post-tab.active {
+  color: #fff;
+}
+
+.create-post-container input {
+  border: solid;
+  border-width: .5px;
+}
+
+.authorInput {
+  padding: 1em;
+  margin-bottom: 1em;
+}
+@media screen and (max-width: 768px) {
+  .create-post-container {
     width: 100%;
-    margin-bottom: 20px;
   }
-  
-  .create-post-button {
-    padding: 10px 20px;
-    border-radius: 5px;
-    background-color: #FFA500;
-    color: #fff;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  
-  .create-post-button:hover {
-    background-color:#c9ac07d2;
-  }
-  
-  .create-post-tabs {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-  }
-  
-  .create-post-tab {
-    padding: 10px 20px;
-    border-radius: 5px;
-    background-color: #f2f2f2;
-    color: #333;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    margin-right: 10px;
-    border: none;
-  }
-  
-  .create-post-tab:hover {
-    background-color: #e6e6e6;
-  }
-  
-  .create-post-tab.active {
-    background-color: #9B59B6;
-    color: #fff;
-  }
-  
-  .create-post-tab.active:hover {
-    background-color: #8E44AD;
-  }
+}

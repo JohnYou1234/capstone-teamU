@@ -2,35 +2,6 @@
     background-color: rgb(166, 121, 202);
 }
 
-.boardList p:hover {
-    transform: scale(1.02);
-    transition: transform 0.3s ease-in-out;
-    box-shadow: 0px 0px 10px rgba(134, 62, 194, 0.3);
-}
-
-.boardFilterBar {
-    margin-bottom: 1rem;
-    width: 100%;
-}
-
-.createBoard {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #1a1a2e;
-    color: #fff;
-    padding: 8px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    margin-bottom: 1rem;
-}
-
-.createBoard:hover {
-    background-color: #6d5eaa;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-}
-
 /* found this block of css rules for search bar on codepen  https://codepen.io/kmuenster/pen/XWWeQGw */
 .searchBar {
     width: 100%;

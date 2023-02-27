@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Offcanvas } from 'react-bootstrap';
 import { FiPlus } from 'react-icons/fi';
 import CreateBoard from './CreateBoard';
+import './BoardList.css';
 function BoardList(props) {
   const showList = props.showList;
   const handleClose = () => props.handleClose();
@@ -21,6 +22,8 @@ function BoardList(props) {
             <span><FiPlus /></span>
             <span>Create Board</span>
         </div>
+        {/* filter bar */}
+        <input type={'text'} placeholder={'Filter Boards'} className={'boardFilterBar'}/>
           <nav className='boardList'>
             <p>General</p>
             <p>Boxers</p>

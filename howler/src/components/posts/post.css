@@ -2,13 +2,10 @@
     padding: 1rem 1rem 1rem 1rem;
 }
 
-.post p {
-    color: rgb(90, 83, 83);
-}
 .post {
     height: fit-content;
     width: 300px;
-    padding: 1rem 1rem 1rem 1rem;
+    padding: 1.5em;
     margin-right: 1rem;
     margin-top: 1rem;
     border-radius: 10px;
@@ -20,10 +17,19 @@
 .post:hover {
     box-shadow: 0 0 11px rgba(33,33,33,.2); 
   }
-.category {
-    color: rgb(183, 66, 238);
+
+.content {
+    color: rgb(43, 41, 41);
 }
 
+.author {
+    color:rgb(73, 70, 77)
+}
+
+/* like author color */
+.category {
+    color: rgb(56, 93, 117);
+}
 .title {
     color: black !important;
     font-size: 20px;

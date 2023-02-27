@@ -8,9 +8,10 @@ function Post (props) {
                 backgroundColor: `${bcolor}`
             }}>
             <p className='category'>{data.category}</p>
+            <p className='author'>{data.author}</p>
             <p className='title'>{data.title}</p>
-            <p>
-                {data.text}
+            <p className='content'>
+                {data.content}
             </p>
             {data.image ?  <img src={data.image} className="prev-img" /> : <p></p>}
         </div>

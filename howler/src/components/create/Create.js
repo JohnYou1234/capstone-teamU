@@ -3,11 +3,9 @@ import './create.css';
 
 function CreatePost() {
   const [tab, setTab] = useState('text');
-
   const handleTabChange = (tab) => {
     setTab(tab);
   };
-
   const renderTabContent = () => {
     switch (tab) {
       case 'text':
@@ -16,7 +14,7 @@ function CreatePost() {
         );
       case 'image':
         return (
-          <input type="text" className="create-post-input" placeholder="Image URL" />
+          <input type="text" className="create-post-input" placeholder="IMGUR LINK" />
         );
       case 'link':
         return (
@@ -31,6 +29,10 @@ function CreatePost() {
     }
   };
 
+  const [category, setCategory] = useState('Select a category');
+  const handleCategoryChange = (event) => {
+    setCategory(event.target.value);
+  };
   return (
     <div className="create-post-container">
       <h2 className="create-post-title">Create a Post</h2>
@@ -64,6 +66,18 @@ function CreatePost() {
       </div>
 
       {renderTabContent()}
+      <div>
+        <select className="create-post-input" value={category} onChange={handleCategoryChange}>
+          <option disabled>Select a category</option>
+          <option value="advice">Advice</option>
+          <option value="emotionalSupport">Emotional Support</option>
+          <option value="introduction">Introduction</option>
+          <option value="rantVent">Rant/Vent</option>
+          <option value="selfImprovement">Self Improvement</option>
+
+        </select>
+      </div>
+      <input type="text" className="authorInput" placeholder="Author" />
 
       <button className="create-post-button">Submit</button>
     </div>
