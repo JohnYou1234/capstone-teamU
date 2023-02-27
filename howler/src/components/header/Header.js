@@ -19,8 +19,11 @@ function Header() {
               <Nav.Item>
                 <a onClick={() => { openList()}} className="nav-link">Boards</a>
               </Nav.Item>
-              <Nav.Item>
-                <a href="/search" className="nav-link">Search</a>
+              <Nav.Item className='d-flex align-items-center'>
+              {/* found this on codepen  https://codepen.io/kmuenster/pen/XWWeQGw*/}
+              <div className="searchBar"> 
+                <input id="searchQueryInput" type="text" name="searchQueryInput" placeholder="Search" />
+              </div>
               </Nav.Item>
               <Nav.Item>
                 <a href="/create" className="nav-link">Create</a>
