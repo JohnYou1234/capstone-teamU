@@ -11,10 +11,13 @@ function BoardList(props) {
             <Offcanvas.Title>Boards</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-            <nav className='board-list'>
-                <p>Senior Year Students</p>
-                <p>Informatics</p>
+            <input type="text" placeholder='Filter...' className='boardFilterBar'/>
+            <nav className='boardList'>
+                <p>General</p>
+                <p>Boxers</p>
                 <p>Gamers</p>
+                <p>Informatics</p>
+                <p>Senior Year Students</p>
             </nav>
             </Offcanvas.Body>
         </Offcanvas>

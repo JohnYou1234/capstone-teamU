@@ -17,13 +17,20 @@ function Header() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto">
               <Nav.Item>
+<<<<<<< HEAD
                 <a onClick={() => { openList()}} className="nav-link">Boards</a>
+=======
+                <text onClick={() => { openList()}} className="nav-link">Boards</text>
+              </Nav.Item>
+              <Nav.Item className='d-flex align-items-center'>
+              {/* found this on codepen  https://codepen.io/kmuenster/pen/XWWeQGw*/}
+              <div className="searchBar"> 
+                <input id="searchQueryInput" type="text" name="searchQueryInput" placeholder="Search" />
+              </div>
+>>>>>>> development
               </Nav.Item>
               <Nav.Item>
-                <a href="/about" className="nav-link">Search</a>
-              </Nav.Item>
-              <Nav.Item>
-                <a href="/contact" className="nav-link">Create</a>
+                <a href="/create" className="nav-link">Create</a>
               </Nav.Item>
             </Nav>
           </Navbar.Collapse>
