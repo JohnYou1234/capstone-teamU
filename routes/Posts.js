@@ -2,6 +2,7 @@ import express from 'express';
 
 const app  = express();
 app.get('/viewAll', async function (req, res) {
+    console.log("viewAll ran!");
     try {
         const Post = req.db.Post;
         // sort by date latest to earliest
@@ -12,6 +13,7 @@ app.get('/viewAll', async function (req, res) {
         });
     } catch {
         (err) => {
+            console.log(err);
             res.send({
                 "success": false,
                 "message": "Error getting posts",
