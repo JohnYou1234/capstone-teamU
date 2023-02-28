@@ -1,7 +1,5 @@
 import mongoose from 'mongoose';
 const PostSchema = '../models/Post.js';
-import dotenv from 'dotenv';
-dotenv.config();
 // Connect to database
 dbConnect().catch((err) => console.log(err));
 let db = {}
