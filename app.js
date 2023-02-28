@@ -18,7 +18,10 @@ app.use(function (req, res, next) {
 })
 
 app.use('/api/posts', PostRouter);
-
+// hello world api get endpoint
+app.get('/api/hello', (req, res) => {
+    res.send({ express: 'Hello From Express' });
+});
 app.use(express.static(path.resolve(__dirname, './howler/build')));
 app.listen(PORT, () => {
     console.log(`Server listening on the port::${PORT}`);
