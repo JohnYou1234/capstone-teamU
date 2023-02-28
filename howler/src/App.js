@@ -17,7 +17,9 @@ function App() {
             }/>
             <Route path="search" element={<p>Search !</p>} />
             <Route path="create" element={<Create />} />
-            <Route path="/*" element={<p>Nothing here... </p>} />
+            <Route path="/*" element={<div>
+              <p>404</p>
+            </div>} />
 
         </Routes>
     </div>

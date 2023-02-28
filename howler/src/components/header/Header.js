@@ -13,7 +13,7 @@ function Header() {
     <>
       <Navbar variant="dark" expand="lg" className='custom-nav'>
         <Container>
-          <Navbar.Brand href="/">Howler</Navbar.Brand>
+          <Navbar.Brand><Link to="/" className="nav-link">Howler</Link></Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto">

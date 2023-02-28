@@ -14,8 +14,12 @@
     
 }
 
+.post p {
+    cursor: default;
+}
 .post:hover {
-    box-shadow: 0 0 11px rgba(33,33,33,.2); 
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
   }
 
 .content {
@@ -26,6 +30,9 @@
     color:rgb(73, 70, 77)
 }
 
+.date {
+    color:rgb(88, 87, 88)
+}
 /* like author color */
 .category {
     color: rgb(56, 93, 117);

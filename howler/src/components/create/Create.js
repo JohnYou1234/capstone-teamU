@@ -1,71 +1,100 @@
 import React, { useState } from 'react';
 import './create.css';
-
+import Tabs from './Tabs';
+import TabContent from './TabContent';
 function CreatePost() {
+  const [feedback, setFeedback] = useState('');
+
   const [tab, setTab] = useState('text');
   const handleTabChange = (tab) => {
     setTab(tab);
   };
-  const renderTabContent = () => {
-    switch (tab) {
-      case 'text':
-        return (
-          <textarea className="create-post-input" placeholder="Text" />
-        );
-      case 'image':
-        return (
-          <input type="text" className="create-post-input" placeholder="IMGUR LINK" />
-        );
-      case 'link':
-        return (
-          <input type="text" className="create-post-input" placeholder="Link URL" />
-        );
-      case 'poll':
-        return (
-            <p>Not implemented yet</p>
-        )
-      default:
-        return null;
-    }
+  const [isDisabled, setIsDisabled] = useState(false);
+  const handleDisable = (bool) => {
+    setIsDisabled(bool);
+  };
+  const [postText, setPostText] = useState('');
+  const [imageLink, setImageLink] = useState('');
+  const [link, setLink] = useState('');
+  const [author, setAuthor] = useState('');
+  const handleAuthorChange = (event) => {
+    setAuthor(event.target.value);
   };
 
   const [category, setCategory] = useState('Select a category');
   const handleCategoryChange = (event) => {
     setCategory(event.target.value);
   };
+
+  const [title, setTitle] = useState('');
+  const handleTitleChange = (event) => {
+    setTitle(event.target.value);
+  };
+
+  const [bgColor, setBgColor] = useState('#E6CA85');
+  const handleBgColorChange = (color) => {
+    setBgColor(color);
+  };
+  const BgColorButton = (color) => {
+    return (<div key={color} className="bg-color-button" style={{backgroundColor: color}} onClick={() => handleBgColorChange(color)}></div>)
+  }
+  const colorList=['#E6CA85', '#F2B880', '#90D7C9', '#EEE8AB', '#F4B2B2','#D1B2F7']
+  const handlePostSubmit = () => {
+    const post = {
+      type: tab,
+      title,
+      category,
+      author,
+      bgColor
+    };
+    if (tab === 'text') {
+      post.content = postText;
+    } else if (tab === 'image') {
+      post.content = imageLink;
+    } else if (tab === 'link') {
+      post.content = link;
+    } else if (tab === 'poll') {
+      alert('Not implemented yet');
+      return;
+    }
+    if (post.content === ""|| post.author === ''|| post.category === 'Select a category' || post.title === '') {
+      alert('Please fill out all fields');
+      return;
+    }
+    handleDisable(true);
+    setFeedback('Creating post...');
+    fetch('http://localhost:3080/api/posts/create', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(post),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setFeedback(data.message);
+        handleDisable(false);
+        setPostText('');
+        setImageLink('');
+        setLink('');
+        setAuthor('');
+        setCategory('Select a category');
+        setTitle('');
+        setBgColor('#E6CA85');
+      })
+      .catch((err) => {
+        setFeedback('Error creating post');
+        handleDisable(false);
+      });
+  }
+
   return (
     <div className="create-post-container">
       <h2 className="create-post-title">Create a Post</h2>
-      <input type="text" className="create-post-input" placeholder="Title" />
+      <input type="text" className="create-post-input" placeholder="Title" onChange={handleTitleChange} value={title}/>
 
-      <div className="create-post-tabs">
-        <button
-          className={`create-post-tab ${tab === 'text' ? 'active' : ''}`}
-          onClick={() => handleTabChange('text')}
-        >
-          Text
-        </button>
-        <button
-          className={`create-post-tab ${tab === 'image' ? 'active' : ''}`}
-          onClick={() => handleTabChange('image')}
-        >
-          Image
-        </button>
-        <button
-          className={`create-post-tab ${tab === 'link' ? 'active' : ''}`}
-          onClick={() => handleTabChange('link')}
-        >
-          Link
-        </button>
-        <button
-          className={`create-post-tab ${tab === 'poll' ? 'active' : ''}`}
-          onClick={() => handleTabChange('poll')}
-        >
-          Poll
-        </button>
-      </div>
-
-      {renderTabContent()}
+      <Tabs tab={tab} handleTabChange={handleTabChange} />
+      <TabContent tab={tab} setPostText={setPostText} postText={postText} setImageLink={setImageLink} imageLink={imageLink} setLink={setLink} link={link} />
       <div>
         <select className="create-post-input" value={category} onChange={handleCategoryChange}>
           <option disabled>Select a category</option>
@@ -74,12 +103,21 @@ function CreatePost() {
           <option value="introduction">Introduction</option>
           <option value="rantVent">Rant/Vent</option>
           <option value="selfImprovement">Self Improvement</option>
-
         </select>
       </div>
-      <input type="text" className="authorInput" placeholder="Author" />
-
-      <button className="create-post-button">Submit</button>
+      <input onChange={handleAuthorChange} type="text" className="authorInput" placeholder="Author" value={author}/>
+      <div className="bg-color-container">
+        {colorList.map(color => BgColorButton(color))}
+      </div>
+      <div className="bg-color-preview" style={{width: '50px', height: '50px', backgroundColor: bgColor}}></div>
+      <button
+        onClick={handlePostSubmit}
+        className={`create-post-button ${isDisabled ? 'disabled' : ''}`}
+        disabled={isDisabled}
+      >
+        Create
+      </button>
+      <span>{feedback}</span>
     </div>
   );
 };
