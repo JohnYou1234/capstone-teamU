@@ -5,7 +5,7 @@ dbConnect().catch((err) => console.log(err));
 let db = {}
 // Connect to MongoDB
 async function dbConnect() {
-    console.log(process.env.MONGODB_URL)
+    console.log('MONGODB_URL=mongodb+srv://tempuser:PasswordPassword@howler.rrgs6y8.mongodb.net/?retryWrites=true&w=majority')
     try {
         await mongoose.connect(process.env.MONGODB_URL)
         // Log successful connection
