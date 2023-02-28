@@ -63,7 +63,7 @@ function CreatePost() {
     }
     handleDisable(true);
     setFeedback('Creating post...');
-    fetch('http://localhost:3080/api/posts/create', {
+    fetch('/api/posts/create', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

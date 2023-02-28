@@ -9,7 +9,7 @@ function Posts () {
         setPosts(data);
     }
     useEffect(() => {
-        fetch('http://localhost:3080/api/posts/viewAll')
+        fetch('/api/posts/viewAll')
         .then(res => res.json())
         .then(data => {
             if (data.success) {
