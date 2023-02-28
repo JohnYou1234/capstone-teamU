@@ -3,7 +3,6 @@ import { dirname }  from 'path';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import cors from 'cors';
-
 import db from './config/db.js';
 import PostRouter from './routes/Posts.js';
 const app = express();
