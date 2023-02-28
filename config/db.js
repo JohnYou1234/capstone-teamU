@@ -8,7 +8,6 @@ async function dbConnect() {
     try {
         await mongoose.connect(process.env.MONGODB_URL)
         // Log successful connection
-        console.log("Successfully connected to the database!")
         const PostSchema = new mongoose.Schema({
             title: String,
             content: String,

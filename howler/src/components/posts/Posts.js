@@ -15,6 +15,7 @@ function Posts () {
             if (data.success) {
                 handlePostUpdate(data.posts);
             } else {
+                console.log(data.err)
                 throw new Error('Error loading posts');
             }
         })
