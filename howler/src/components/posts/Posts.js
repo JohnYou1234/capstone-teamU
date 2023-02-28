@@ -1,7 +1,7 @@
 import Post from './Post';
-import {postData} from '../../data/post_data.js';
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry"
 import React, {useState, useEffect} from 'react';
+// posts
 function Posts () {
     const [posts, setPosts] = useState([]);
     const [feedback, setFeedback] = useState('');
