@@ -1,0 +1,48 @@
+.thread-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.thread-post {
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  padding: 20px;
+  margin-top: 10px;
+}
+
+.thread-post-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.thread-post-content {
+  margin-bottom: 10px;
+}
+
+.thread-comments {
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.comment {
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.comment-header {
+  margin-bottom: 5px;
+}
+
+.comment-content {
+  margin-bottom: 5px;
+}

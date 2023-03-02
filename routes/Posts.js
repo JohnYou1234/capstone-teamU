@@ -1,5 +1,4 @@
 import express from 'express';
-
 const app  = express();
 app.get('/viewAll', async function (req, res) {
     try {
@@ -45,6 +44,26 @@ app.post('/create', async function (req, res) {
                 "success": false,
                 "message": "Error creating post",
                 "error": err
+            });
+            return;
+        }
+    }
+})
+
+// find post by id
+app.get('/viewOne/:id', async function (req, res) {
+    const Post = req.db.Post;
+    try {
+        const post = await Post.findById(req.params.id);
+        res.send({
+            "post": post,
+            "success": true
+        });
+    } catch {
+        (err) => {
+            res.send({
+                "success": false,
+                "message": "Error getting post"
             });
             return;
         }

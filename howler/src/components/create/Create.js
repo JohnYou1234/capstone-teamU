@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './create.css';
 import Tabs from './Tabs';
 import TabContent from './TabContent';
+import ColorPalette from './ColorPalette';
 function CreatePost() {
   const [feedback, setFeedback] = useState('');
 
@@ -16,10 +17,6 @@ function CreatePost() {
   const [postText, setPostText] = useState('');
   const [imageLink, setImageLink] = useState('');
   const [link, setLink] = useState('');
-  const [author, setAuthor] = useState('');
-  const handleAuthorChange = (event) => {
-    setAuthor(event.target.value);
-  };
 
   const [category, setCategory] = useState('Select a category');
   const handleCategoryChange = (event) => {
@@ -35,16 +32,13 @@ function CreatePost() {
   const handleBgColorChange = (color) => {
     setBgColor(color);
   };
-  const BgColorButton = (color) => {
-    return (<div key={color} className="bg-color-button" style={{backgroundColor: color}} onClick={() => handleBgColorChange(color)}></div>)
-  }
   const colorList=['#E6CA85', '#F2B880', '#90D7C9', '#EEE8AB', '#F4B2B2','#D1B2F7']
   const handlePostSubmit = () => {
     const post = {
       type: tab,
       title,
       category,
-      author,
+      author: "Anonymous",
       bgColor
     };
     if (tab === 'text') {
@@ -57,7 +51,7 @@ function CreatePost() {
       alert('Not implemented yet');
       return;
     }
-    if (post.content === ""|| post.author === ''|| post.category === 'Select a category' || post.title === '') {
+    if (post.content === ""|| post.category === 'Select a category' || post.title === '') {
       alert('Please fill out all fields');
       return;
     }
@@ -77,7 +71,6 @@ function CreatePost() {
         setPostText('');
         setImageLink('');
         setLink('');
-        setAuthor('');
         setCategory('Select a category');
         setTitle('');
         setBgColor('#E6CA85');
@@ -105,11 +98,7 @@ function CreatePost() {
           <option value="selfImprovement">Self Improvement</option>
         </select>
       </div>
-      <input onChange={handleAuthorChange} type="text" className="authorInput" placeholder="Author" value={author}/>
-      <div className="bg-color-container">
-        {colorList.map(color => BgColorButton(color))}
-      </div>
-      <div className="bg-color-preview" style={{width: '50px', height: '50px', backgroundColor: bgColor}}></div>
+      <ColorPalette colorList={colorList} bgColor={bgColor} handleBgColorChange={handleBgColorChange} includeBtn={true}/>
       <button
         onClick={handlePostSubmit}
         className={`create-post-button ${isDisabled ? 'disabled' : ''}`}

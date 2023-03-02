@@ -11,7 +11,19 @@
     border-radius: 10px;
     position: relative;
     align-self: center;
+    pointer-events: auto;
     
+}
+
+.post-link {
+    color: inherit;
+    text-decoration: none;
+    pointer-events: none;
+}
+
+.post-board {
+    width: 100%;
+    height: 100%;
 }
 
 .post p {
