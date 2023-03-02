@@ -5,6 +5,7 @@ import { fileURLToPath } from 'url';
 import cors from 'cors';
 import db from './config/db.js';
 import PostRouter from './routes/Posts.js';
+import CommentRouter from './routes/Comments.js';
 const app = express();
 const PORT = process.env.PORT || 3080;
 app.use(express.json());
@@ -18,7 +19,7 @@ app.use(function (req, res, next) {
 })
 
 app.use('/api/posts', PostRouter);
-
+app.use('/api/comments', CommentRouter);
 app.use(express.static(path.resolve(__dirname, './howler/build')));
 app.listen(PORT, () => {
     console.log(`Server listening on the port::${PORT}`);

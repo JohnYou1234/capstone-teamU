@@ -19,8 +19,17 @@ async function dbConnect() {
         type: String,
         date: { type: Date, default: Date.now }
     });   
-    db.Post = mongoose.model('Posts', PostSchema)
-    console.log("Created DB Schemas and Models")
+
+    const CommentSchema = new mongoose.Schema({
+        content: String,
+        bgColor: String,
+        date: { type: Date, default: Date.now },
+        post: { type: mongoose.Schema.Types.ObjectId, ref: 'Post' }
+        // replies: [CommentSchema]
+    });
+    db.Post = mongoose.model('Post', PostSchema);
+    db.Comment = mongoose.model('Comment', CommentSchema);
+    console.log("Created DB Schemas and Models");
 }
 
 export default db;
