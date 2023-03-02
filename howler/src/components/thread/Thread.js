@@ -14,7 +14,7 @@ function Thread() {
     const [refresh, setRefresh] = useState(false);
 
     useEffect(() => {
-        fetch(`http://localhost:3080/api/posts/viewOne/${postId}`)
+        fetch(`/api/posts/viewOne/${postId}`)
         .then(res => res.json())
         .then(data => {
             if (data.success) {
