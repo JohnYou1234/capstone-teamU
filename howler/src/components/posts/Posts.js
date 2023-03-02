@@ -1,5 +1,4 @@
-import Post from './Post';
-import {postData} from '../../data/post_data.js';
+import PostPreview from './PostPreview';
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry"
 import React, {useState, useEffect} from 'react';
 function Posts () {
@@ -32,7 +31,7 @@ function Posts () {
                 :
                 posts.map((post, index) => {
                     return (
-                        <Post key={index} postData={post}/>
+                        <PostPreview key={index} postData={post}/>
                     )
                 })}
                 
