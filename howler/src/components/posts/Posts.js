@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import Post from './Post';
-=======
 import PostPreview from './PostPreview';
->>>>>>> development
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry"
 import React, {useState, useEffect} from 'react';
 // posts
