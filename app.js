@@ -15,7 +15,6 @@ const __dirname = dirname(__filename);
 app.use(cors());
 app.use(function (req, res, next) {
     req.db = db;
-    console.log("hello");
     next()
 })
 
