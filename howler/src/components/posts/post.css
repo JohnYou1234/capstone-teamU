@@ -60,7 +60,6 @@
 .posts {
     width: 60%;
 }
-/* .posts width 100% after screen sizes 762 */
 
 @media screen and (max-width: 1366px) {
     .posts {
