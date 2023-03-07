@@ -29,7 +29,8 @@ app.post('/create', async function (req, res) {
         bgColor: req.body.bgColor,
         author: req.body.author,
         category: req.body.category,
-        type: req.body.type
+        type: req.body.type,
+        board: req.body.board
     })
     try {
         await newPost.save();
@@ -70,4 +71,23 @@ app.get('/viewOne/:id', async function (req, res) {
     }
 })
 
+// get all posts with certain board id
+app.get('/viewAllPosts/:id', async function (req, res) {
+    try {
+        const Post = req.db.Post;
+        const posts = await Post.find({board: req.params.id}).sort({date: -1});
+        res.send({
+            "posts": posts,
+            'success': true
+        });
+    } catch {
+        (err) => {
+            res.send({
+                "success": false,
+                "message": "Error getting posts"
+            });
+            return;
+        }
+    }
+});
 export default app;

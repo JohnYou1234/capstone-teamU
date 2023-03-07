@@ -27,3 +27,12 @@
     background-color: #6d5eaa;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
+
+.margin-top {
+    margin-top: 1rem;
+}
+
+.unstyledLink {
+    text-decoration: none;
+    color: inherit;
+}

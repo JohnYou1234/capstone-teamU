@@ -2,7 +2,7 @@ import React from 'react';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import './header.css';
 import {useState} from 'react';
-import BoardList from './BoardList.js';
+import BoardList from '../boards/BoardList';
 import {Link} from 'react-router-dom';
 
 function Header() {
