@@ -29,7 +29,7 @@ function Thread() {
             console.log(err)
         });
         if (post.board) {
-            fetch(`http://localhost:3080/api/boards/getBoardName/${post.board}`)
+            fetch(`/api/boards/getBoardName/${post.board}`)
                 .then(res => res.json())
                 .then(data => {
                     if (data.success) {
