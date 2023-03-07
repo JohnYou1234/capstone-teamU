@@ -11,7 +11,7 @@ function Header() {
   const openList = () => setShowList(true);
   return (
     <>
-      <Navbar variant="dark" expand="lg" className='custom-nav'>
+        <Navbar variant="dark" expand="lg" className='custom-nav'>
         <Container>
           <Navbar.Brand><Link to="/" className="nav-link">Howler</Link></Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />

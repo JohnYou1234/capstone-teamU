@@ -1,10 +1,8 @@
-.posts {
-    padding: 1rem 1rem 1rem 1rem;
-}
+    
 
 .post {
     height: fit-content;
-    width: 300px;
+    width: 350px;
     padding: 1.5em;
     margin-right: 1rem;
     margin-top: 1rem;
@@ -12,13 +10,14 @@
     position: relative;
     align-self: center;
     pointer-events: auto;
-    
 }
 
 .post-link {
     color: inherit;
     text-decoration: none;
     pointer-events: none;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .post-board {
@@ -56,4 +55,31 @@
 .prev-img {
     width: 100%;
     align-self: center;
+}
+
+.posts {
+    width: 60%;
+}
+/* .posts width 100% after screen sizes 762 */
+
+@media screen and (max-width: 1366px) {
+    .posts {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 968px) {
+    .posts {
+        width: 100%;
+    }
+}
+
+.autoLr {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.spinner {
+    display: flex;
+    justify-content: center;
 }

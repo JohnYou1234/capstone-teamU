@@ -3,6 +3,8 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;  
+    background-color: rgb(141, 91, 165);
+    margin-bottom: 20px;
 }
 
 .center {

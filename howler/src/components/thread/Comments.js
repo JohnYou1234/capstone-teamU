@@ -26,7 +26,7 @@ function Comments(props) {
         return (
             <div key={index} style={{backgroundColor: `${comment.bgColor}`}} className="comment">
                 <div className="comment-header">
-                    <p>{formatDate(comment.date)}</p>
+                    {comment.date ? <p>{formatDate(comment.date)}</p>: <p></p>} 
                 </div>
                 <div className="comment-content">
                     <p>{comment.content}</p>
@@ -37,7 +37,9 @@ function Comments(props) {
     return (
         <div className="thread-comments">
             <h3>Comments</h3>
-            {comments.map((comment, index) => {
+            {comments.length === 0 ? 
+            <Comment comment={{content: 'No comments yet', bgColor: '#ffffff'}} index={0}/> :
+            comments.map((comment, index) => {
                 return <Comment comment={comment} index={index} key={index}/>;
             })}
         </div>

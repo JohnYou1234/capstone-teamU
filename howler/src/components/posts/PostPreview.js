@@ -40,7 +40,7 @@ function PostPreview (props) {
 }
 
 function cutContentShort(content) {
-    if (content.length > 100) {
+    if (content.length > 300) {
         return content.slice(0, 100) + "...";
     }
     return content;

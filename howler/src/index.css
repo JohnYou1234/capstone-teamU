@@ -2,9 +2,14 @@
 
 body {
   margin: 0;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  /* background-color: rgb(202, 196, 196);
+  height: 100%; */
 }
 
 .boardInfo {
