@@ -17,6 +17,7 @@ async function dbConnect() {
         author: String,
         category: String,
         type: String,
+        board: { type: mongoose.Schema.Types.ObjectId, ref: 'Board' },
         date: { type: Date, default: Date.now }
     });   
 
@@ -27,8 +28,16 @@ async function dbConnect() {
         post: { type: mongoose.Schema.Types.ObjectId, ref: 'Post' }
         // replies: [CommentSchema]
     });
+
+    const BoardSchema = new mongoose.Schema({
+        name: String,
+        description: String,
+        date: { type: Date, default: Date.now }
+    });
+
     db.Post = mongoose.model('Post', PostSchema);
     db.Comment = mongoose.model('Comment', CommentSchema);
+    db.Board = mongoose.model('Board', BoardSchema);
     console.log("Created DB Schemas and Models");
 }
 

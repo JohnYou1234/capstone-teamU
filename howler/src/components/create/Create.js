@@ -3,6 +3,7 @@ import './create.css';
 import Tabs from './Tabs';
 import TabContent from './TabContent';
 import ColorPalette from './ColorPalette';
+import BoardSelect from './BoardSelect';
 function CreatePost() {
   const [feedback, setFeedback] = useState('');
 
@@ -33,13 +34,20 @@ function CreatePost() {
     setBgColor(color);
   };
   const colorList=['#E6CA85', '#F2B880', '#90D7C9', '#EEE8AB', '#F4B2B2','#D1B2F7']
+
+  const [board, setBoard] = useState('Select a board');
+  const handleBoardChange = (event) => {
+    setBoard(event.target.value);
+  };
+
   const handlePostSubmit = () => {
     const post = {
       type: tab,
       title,
       category,
       author: "Anonymous",
-      bgColor
+      bgColor,
+      board: board
     };
     if (tab === 'text') {
       post.content = postText;
@@ -51,12 +59,13 @@ function CreatePost() {
       alert('Not implemented yet');
       return;
     }
-    if (post.content === ""|| post.category === 'Select a category' || post.title === '') {
+    if (post.content === ""|| post.category === 'Select a category' || post.title === '' || post.bgColor === '' || post.board === 'Select a board') {
       alert('Please fill out all fields');
       return;
     }
     handleDisable(true);
     setFeedback('Creating post...');
+    console.log(post);
     fetch('http://localhost:3080/api/posts/create', {
       method: 'POST',
       headers: {
@@ -80,7 +89,6 @@ function CreatePost() {
         handleDisable(false);
       });
   }
-
   return (
     <div className="create-post-container">
       <h2 className="create-post-title">Create a Post</h2>
@@ -89,14 +97,17 @@ function CreatePost() {
       <Tabs tab={tab} handleTabChange={handleTabChange} />
       <TabContent tab={tab} setPostText={setPostText} postText={postText} setImageLink={setImageLink} imageLink={imageLink} setLink={setLink} link={link} />
       <div>
-        <select className="create-post-input" value={category} onChange={handleCategoryChange}>
-          <option disabled>Select a category</option>
-          <option value="advice">Advice</option>
-          <option value="emotionalSupport">Emotional Support</option>
-          <option value="introduction">Introduction</option>
-          <option value="rantVent">Rant/Vent</option>
-          <option value="selfImprovement">Self Improvement</option>
-        </select>
+        <div>
+          <select className="create-post-input" value={category} onChange={handleCategoryChange}>
+            <option disabled>Select a category</option>
+            <option value="advice">Advice</option>
+            <option value="emotionalSupport">Emotional Support</option>
+            <option value="introduction">Introduction</option>
+            <option value="rantVent">Rant/Vent</option>
+            <option value="selfImprovement">Self Improvement</option>
+          </select>
+        </div>
+        <BoardSelect board={board} handleBoardChange={handleBoardChange}/>
       </div>
       <ColorPalette colorList={colorList} bgColor={bgColor} handleBgColorChange={handleBgColorChange} includeBtn={true}/>
       <button

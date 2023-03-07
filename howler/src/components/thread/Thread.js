@@ -12,7 +12,7 @@ function Thread() {
     const [loading, setLoading] = useState(true);
     const {postId} = useParams();
     const [refresh, setRefresh] = useState(false);
-
+    const [boardName, setBoardName] = useState('');
     useEffect(() => {
         fetch(`http://localhost:3080/api/posts/viewOne/${postId}`)
         .then(res => res.json())
@@ -28,6 +28,22 @@ function Thread() {
         .catch(err => {
             console.log(err)
         });
+        if (post.board) {
+            fetch(`http://localhost:3080/api/boards/getBoardName/${post.board}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        setBoardName(data.board.name);
+                    } else {
+                        throw new Error('Error loading board name');
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+            } else {
+                setBoardName('General');
+            }
     }, []);
     return (
         <>
@@ -41,7 +57,7 @@ function Thread() {
                     <div className="thread-post" style={{ backgroundColor: `${post.bgColor}`}} >
                         <div className="thread-post-header">
                             <h2>{post.title}</h2>
-                            <p>Posted by: {post.author}</p>
+                            <p>{boardName}</p>
                         </div>
                         <p>{formatDate(post.date)}</p>
                         <div className="thread-post-content">

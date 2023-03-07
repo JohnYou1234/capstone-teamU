@@ -26,7 +26,6 @@ function Comments(props) {
         return (
             <div key={index} style={{backgroundColor: `${comment.bgColor}`}} className="comment">
                 <div className="comment-header">
-                    <p>Posted by: {comment.author}</p>
                     <p>{formatDate(comment.date)}</p>
                 </div>
                 <div className="comment-content">
