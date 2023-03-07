@@ -7,7 +7,7 @@ function Comments(props) {
     const [loading, setLoading] = useState(true);
     useEffect(() => {
         setLoading(true);
-        fetch(`http://localhost:3080/api/comments/viewAll/${props.postId}`)
+        fetch(`/api/comments/viewAll/${props.postId}`)
         .then(res => res.json())
         .then(data => {
             if (data.success) {

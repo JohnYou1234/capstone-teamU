@@ -13,7 +13,8 @@ app.get('/viewAll', async function (req, res) {
         (err) => {
             res.send({
                 "success": false,
-                "message": "Error getting posts"
+                "message": "Error getting posts",
+                "err": err
             });
             return;
         }

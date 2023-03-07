@@ -15,7 +15,7 @@ function Posts () {
     }
 
     const {boardId} = useParams();
-    let link = boardId === undefined ? 'http://localhost:3080/api/posts/viewAll' : `http://localhost:3080/api/posts/viewAllPosts/${boardId}`;
+    let link = boardId === undefined ? '/api/posts/viewAll' : `/api/posts/viewAllPosts/${boardId}`;
     useEffect(() => {
         fetch(link)
         .then(res => res.json())
@@ -24,6 +24,7 @@ function Posts () {
                 handlePostUpdate(data.posts);
                 setLoading(false);
             } else {
+                console.log(data.err)
                 throw new Error('Error loading posts');
             }
         })
@@ -32,7 +33,7 @@ function Posts () {
             setLoading(false);  
         });
         if (boardId) {
-            fetch(`http://localhost:3080/api/boards/getBoardName/${boardId}`)
+            fetch(`/api/boards/getBoardName/${boardId}`)
                 .then(res => res.json())
                 .then(data => {
                     if (data.success) {

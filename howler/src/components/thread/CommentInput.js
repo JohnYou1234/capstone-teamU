@@ -21,7 +21,7 @@ function CommentInput(props) {
             return;
         }
         console.log(bgColor);
-        fetch(`http://localhost:3080/api/comments/create/${postId}`, {
+        fetch(`/api/comments/create/${postId}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
