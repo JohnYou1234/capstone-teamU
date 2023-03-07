@@ -8,7 +8,7 @@ function PostPreview (props) {
     const [boardName, setBoardName] = useState('');
     useEffect(() => {
         if (data.board) {
-            fetch(`http://localhost:3080/api/boards/getBoardName/${data.board}`)
+            fetch(`/api/boards/getBoardName/${data.board}`)
                 .then(res => res.json())
                 .then(data => {
                     if (data.success) {
