@@ -62,7 +62,7 @@ function Thread() {
                         </div>
                         <p>{formatDate(post.date)}</p>
                         <div className="thread-post-content">
-                            <p>{post.content}</p>
+                            {parsePostContent(post)}
                         </div>
                     </div>
                     <CommentInput postId={postId} setRefresh={setRefresh} refresh={refresh}/>
@@ -72,5 +72,11 @@ function Thread() {
         </>
     );
 }
-
+function parsePostContent(data) {
+    if (data.type === "image") {
+        return <img className="post-img" src={data.content} alt="post content"/>;
+    } else {
+        return <p className="content">{data.content}</p>;
+    }
+}
 export default Thread;
