@@ -26,7 +26,9 @@ function TabContent(props) {
           );
         case 'image':
           return (
-            <input onChange={handleImageLinkChange} type="text" className="create-post-input" placeholder="IMGUR LINK" value={imageLink}/>
+            <>
+                <input onChange={handleImageLinkChange} type="text" className="create-post-input" placeholder="IMGUR LINK" value={imageLink}/>
+            </>
           );
         case 'link':
           return (
