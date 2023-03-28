@@ -32,13 +32,19 @@ function PostPreview (props) {
                 <p className="title">{data.title}</p>
                 <p className='boardName'>{boardName}</p>
                 <p className="date">{formatDate(data.date)}</p>
-                <p className="content">{cutContentShort(data.content)}</p>
-                {data.image ? <img src={data.image} className="prev-img" /> : <p></p>}
+                {parsePostContent(data)}
             </div>
         </Link>
       );
 }
 
+function parsePostContent(data) {
+    if (data.type === "image") {
+        return <img className="preview-img" src={data.content} alt="post content"/>;
+    } else {
+        return <p className="content">{cutContentShort(data.content)}</p>;
+    }
+}
 function cutContentShort(content) {
     if (content.length > 300) {
         return content.slice(0, 300) + "...";

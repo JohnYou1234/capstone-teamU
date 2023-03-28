@@ -36,24 +36,20 @@ function CreatePost() {
   const colorList=['#E6CA85', '#F2B880', '#90D7C9', '#EEE8AB', '#F4B2B2','#D1B2F7']
 
   const [board, setBoard] = useState('Select a board');
-  const [boardName, setBoardName] = useState('General');
   const handleBoardChange = (event) => {
-    let data = event.target.value.split(',');
-    setBoard(data[0]);
-    setBoardName(data[1]);
+    setBoard(event.target.value);
   };
 
   const handlePostSubmit = () => {
-    console.log(boardName);
     const post = {
       type: tab,
       title,
       category,
       author: "Anonymous",
       bgColor,
-      board: board,
-      boardName: boardName
-    };
+      board: board.split(',')[0],
+      boardName: board.split(',')[1],
+      };
     if (tab === 'text') {
       post.content = postText;
     } else if (tab === 'image') {
