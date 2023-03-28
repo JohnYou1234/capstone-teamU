@@ -3,7 +3,6 @@ const app  = express();
 app.get('/viewAll', async function (req, res) {
     try {
         const Post = req.db.Post;
-        // sort by date latest to earliest
         const posts = await Post.find().sort({date: -1});
         res.send({
             "posts": posts,
@@ -30,7 +29,8 @@ app.post('/create', async function (req, res) {
         author: req.body.author,
         category: req.body.category,
         type: req.body.type,
-        board: req.body.board
+        board: req.body.board,
+        boardName: req.body.boardName
     })
     try {
         await newPost.save();

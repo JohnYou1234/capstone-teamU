@@ -1,12 +1,21 @@
 import { Modal, Button, Form } from 'react-bootstrap';
 import './BoardList.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 function CreateBoard(props) {
     const handleClose = props.handleClose;
     const show = props.show;
 
+    const [feedback , changeFeedback] = useState('');
     const [boardName, changeBoardName] = useState('');
     const handleNameInput = (event) => {
+      const lastLetter = event.target.value[event.target.value.length - 1];
+      if (lastLetter === ',' || lastLetter === ' ') {
+        changeFeedback('No spaces or commas allowed');
+        setTimeout(() => {
+          changeFeedback('');
+        }, 2000);
+        return;
+      }
         changeBoardName(event.target.value);
     }
     const [boardDescription, changeBoardDescription] = useState('');
@@ -62,6 +71,9 @@ function CreateBoard(props) {
           Create
         </Button>
       </Modal.Footer>
+      <div className='center-div'>
+        {feedback}
+      </div>
     </Modal>
   );
 }

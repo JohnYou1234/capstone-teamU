@@ -47,8 +47,9 @@ function CreatePost() {
       category,
       author: "Anonymous",
       bgColor,
-      board: board
-    };
+      board: board.split(',')[0],
+      boardName: board.split(',')[1],
+      };
     if (tab === 'text') {
       post.content = postText;
     } else if (tab === 'image') {
@@ -99,11 +100,11 @@ function CreatePost() {
         <div>
           <select className="create-post-input" value={category} onChange={handleCategoryChange}>
             <option disabled>Select a category</option>
-            <option value="advice">Advice</option>
-            <option value="emotionalSupport">Emotional Support</option>
-            <option value="introduction">Introduction</option>
-            <option value="rantVent">Rant/Vent</option>
-            <option value="selfImprovement">Self Improvement</option>
+            <option value="Advice">Advice</option>
+            <option value="Emotional Support">Emotional Support</option>
+            <option value="Introduction">Introduction</option>
+            <option value="Rant/Vent">Rant/Vent</option>
+            <option value="Self Improvement">Self Improvement</option>
           </select>
         </div>
         <BoardSelect board={board} handleBoardChange={handleBoardChange}/>
