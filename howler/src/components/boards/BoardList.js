@@ -5,6 +5,7 @@ import CreateBoard from './CreateBoard';
 import './BoardList.css';
 import {useEffect} from 'react';
 import {Link} from 'react-router-dom';
+import FilterBar from './Filterbar';
 function BoardList(props) {
   const showList = props.showList;
   const handleClose = () => props.handleClose();
@@ -14,15 +15,28 @@ function BoardList(props) {
 
   const [refresh, setRefresh] = useState(false);
   const [boards, setBoards] = useState([]);
+
+  const [filterText, setFilterText] = useState('');
   useEffect(() => {
     fetch('/api/boards/viewAll')
-    .then(res => res.json())
+    .then(res => {
+      if (res.status !== 200) {
+        throw new Error('Error loading boards');
+      }
+      return res.json()
+    })
     .then(data => {
-      setBoards(data.boards)
+      if (data.success) {
+        setBoards(data.boards)
+      } else {
+        throw new Error('Error loading boards');
+      }
     })
     .catch(err => console.log(err))
   }, [refresh]);
-
+  const filteredBoards = boards.filter(board => {
+    return board.name.toLowerCase().includes(filterText.toLowerCase());
+  });
   return (
     <>
       <Offcanvas show={showList} onHide={handleClose} placement="start">
@@ -37,10 +51,10 @@ function BoardList(props) {
             <span>Create Board</span>
         </div>
         {/* filter bar */}
-        <input type={'text'} placeholder={'Filter Boards'} className={'boardFilterBar'}/>
+        <FilterBar filterText={filterText} setFilterText={setFilterText}/>
           <nav className='boardList'>
             <Link className='unstyledLink' to="/board/"><p>General</p></Link>
-            {boards.map(board => {
+            {filteredBoards.map(board => {
               return ( <Link className='unstyledLink' key={board._id} to={`/board/${board._id}`}><p>{board.name}</p></Link>)
             })}
           </nav>

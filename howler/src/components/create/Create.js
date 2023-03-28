@@ -36,18 +36,23 @@ function CreatePost() {
   const colorList=['#E6CA85', '#F2B880', '#90D7C9', '#EEE8AB', '#F4B2B2','#D1B2F7']
 
   const [board, setBoard] = useState('Select a board');
+  const [boardName, setBoardName] = useState('General');
   const handleBoardChange = (event) => {
-    setBoard(event.target.value);
+    let data = event.target.value.split(',');
+    setBoard(data[0]);
+    setBoardName(data[1]);
   };
 
   const handlePostSubmit = () => {
+    console.log(boardName);
     const post = {
       type: tab,
       title,
       category,
       author: "Anonymous",
       bgColor,
-      board: board
+      board: board,
+      boardName: boardName
     };
     if (tab === 'text') {
       post.content = postText;
@@ -99,11 +104,11 @@ function CreatePost() {
         <div>
           <select className="create-post-input" value={category} onChange={handleCategoryChange}>
             <option disabled>Select a category</option>
-            <option value="advice">Advice</option>
-            <option value="emotionalSupport">Emotional Support</option>
-            <option value="introduction">Introduction</option>
-            <option value="rantVent">Rant/Vent</option>
-            <option value="selfImprovement">Self Improvement</option>
+            <option value="Advice">Advice</option>
+            <option value="Emotional Support">Emotional Support</option>
+            <option value="Introduction">Introduction</option>
+            <option value="Rant/Vent">Rant/Vent</option>
+            <option value="Self Improvement">Self Improvement</option>
           </select>
         </div>
         <BoardSelect board={board} handleBoardChange={handleBoardChange}/>

@@ -1,4 +1,7 @@
 import mongoose from 'mongoose';
+// import env from './env.js';
+import dotenv from 'dotenv';
+dotenv.config();
 const PostSchema = '../models/Post.js';
 // Connect to database
 dbConnect().catch((err) => console.log(err));
@@ -16,6 +19,7 @@ async function dbConnect() {
         category: String,
         type: String,
         board: { type: mongoose.Schema.Types.ObjectId, ref: 'Board' },
+        boardName: String,
         date: { type: Date, default: Date.now }
     });   
 

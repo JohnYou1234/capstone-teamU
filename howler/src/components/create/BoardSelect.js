@@ -21,7 +21,7 @@ function BoardSelect(props) {
                 <option disabled>Select a board</option>
                 {boards.map(board => {
                     return (
-                        <option key={board._id} value={board._id}>{board.name}</option>
+                        <option key={board._id} value={board._id + "," + board.name}>{board.name}</option>
                     )
                 })}
             </select>

@@ -23,7 +23,7 @@ function PostPreview (props) {
             } else {
                 setBoardName('General');
             }
-        }, []);
+        }, [data.board]);
 
     return (
         <Link to={`/thread/${data._id}`} className="post-link">
@@ -41,7 +41,7 @@ function PostPreview (props) {
 
 function cutContentShort(content) {
     if (content.length > 300) {
-        return content.slice(0, 100) + "...";
+        return content.slice(0, 300) + "...";
     }
     return content;
 }

@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { AiOutlineClose } from 'react-icons/ai';
 import CommentInput from "./CommentInput";
 import {formatDate} from '../../helpers.js';
+import { Spinner } from 'react-bootstrap';
 
 function Thread() {
     const [post, setPost] = useState({});
@@ -44,11 +45,11 @@ function Thread() {
             } else {
                 setBoardName('General');
             }
-    }, []);
+    }, [post.board, postId]);
     return (
         <>
             {loading ? (
-                <p>Loading...</p>
+                <div className='spinner center-div'><Spinner animation="border" role="status"/></div>
             ) : (
                 <div className="thread-container">
                     <Link to="/" className="close-button">

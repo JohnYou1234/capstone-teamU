@@ -3,7 +3,6 @@ import Masonry, {ResponsiveMasonry} from "react-responsive-masonry"
 import React, {useState, useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import './post.css';
-// react bootstrap loading 
 import { Spinner } from 'react-bootstrap';
 function Posts () {
     const [posts, setPosts] = useState([]);
@@ -48,13 +47,13 @@ function Posts () {
             } else {
                 setBoardName('General');
             }
-    }, [boardId]);
+    }, [boardId, link]);
     return (
         <div className='postsDiv'>  
             <div className='boardInfo'>
                 <h3>{boardName}</h3>
             </div>     
-            {loading ? <div className='spinner'><Spinner animation="border" role="status"/></div>  :
+            {loading ? <div className='spinner center-div'><Spinner animation="border" role="status"/></div>  :
                 <div className="posts autoLr">
                         <ResponsiveMasonry
                         columnsCountBreakPoints={{730: 1, 968: 2, 1730: 3}}
