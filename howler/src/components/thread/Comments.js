@@ -21,7 +21,7 @@ function Comments(props) {
         .catch(err => {
             console.log(err)
         });
-    }, [props.refresh]);
+    }, [props.refresh, props.postId]);
     const Comment = ({comment, index}) => {
         return (
             <div key={index} style={{backgroundColor: `${comment.bgColor}`}} className="comment">
