@@ -2,7 +2,6 @@ import mongoose from 'mongoose';
 // import env from './env.js';
 import dotenv from 'dotenv';
 dotenv.config();
-const PostSchema = '../models/Post.js';
 // Connect to database
 dbConnect().catch((err) => console.log(err));
 let db = {}
@@ -17,7 +16,7 @@ async function dbConnect() {
         bgColor: String,
         author: String,
         category: String,
-        type: String,
+        type: { type: String, default: 'text' },
         board: { type: mongoose.Schema.Types.ObjectId, ref: 'Board' },
         boardName: String,
         date: { type: Date, default: Date.now }
@@ -28,7 +27,6 @@ async function dbConnect() {
         bgColor: String,
         date: { type: Date, default: Date.now },
         post: { type: mongoose.Schema.Types.ObjectId, ref: 'Post' }
-        // replies: [CommentSchema]
     });
 
     const BoardSchema = new mongoose.Schema({

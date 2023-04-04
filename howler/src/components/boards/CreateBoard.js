@@ -24,6 +24,13 @@ function CreateBoard(props) {
     }
 
     const handleSubmit = () => {
+        if (boardName.length === 0 || boardDescription.length === 0) {
+          changeFeedback('Please fill out all fields');
+          setTimeout(() => {
+            changeFeedback('');
+          }, 2000);
+          return;
+        }
         fetch('/api/boards/create', {
             method: 'POST',
             headers: {

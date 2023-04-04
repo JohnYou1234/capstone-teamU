@@ -1,5 +1,7 @@
 import express from 'express';
 const app  = express();
+import validator from 'validator'
+
 app.get('/viewAll', async function (req, res) {
     try {
         const Post = req.db.Post;
@@ -90,4 +92,29 @@ app.get('/viewAllPosts/:id', async function (req, res) {
         }
     }
 });
+
+// get all posts with a certain search query in its title or in the text content
+app.get('/search', async (req, res) => {
+    const query = req.query.q;
+    const sanitizedQuery = validator.escape(query);
+    try {
+      const Post = req.db.Post;
+  
+      const posts = await Post.find({
+        $or: [
+          { title: { $regex: sanitizedQuery, $options: 'i' } },
+          { content: { $regex: sanitizedQuery, $options: 'i' }, $or: [{ type: 'text' }, { type: { $exists: false } }] },
+        ],
+      });
+  
+      res.send({
+        success: true,
+        posts,
+      });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: 'Server error' });
+    }
+  });
+  
 export default app;

@@ -1,5 +1,6 @@
 import express from 'express';
 const router = express();
+import validator from 'validator'
 
 // get all boards
 router.get('/viewAll', async function (req, res) {
@@ -74,6 +75,24 @@ router.get('/getBoardName/:id', async function (req, res) {
             return;
         }
     }
+});
+
+// search for boards by name
+router.get('/search', async (req, res) => {
+  const query = req.query.q; // Get the search query from the request URL query params
+  // Sanitize the search query
+  const sanitizedQuery = validator.escape(query);
+  try {
+    const Board = req.db.Board;
+    const boards = await Board.find({ name: { $regex: sanitizedQuery, $options: 'i' } });
+    res.send({
+        'success': true,
+        'boards': boards
+    })
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
 });
 
 export default router;

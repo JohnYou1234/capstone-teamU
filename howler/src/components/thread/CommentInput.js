@@ -20,7 +20,6 @@ function CommentInput(props) {
             alert("Please enter a comment")        
             return;
         }
-        console.log(bgColor);
         fetch(`/api/comments/create/${postId}`, {
             method: 'POST',
             headers: {
