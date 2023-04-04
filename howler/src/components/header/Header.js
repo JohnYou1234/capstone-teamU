@@ -4,7 +4,7 @@ import './header.css';
 import {useState} from 'react';
 import BoardList from '../boards/BoardList';
 import {Link} from 'react-router-dom';
-
+import SearchBar from './SearchBar';
 function Header() {
   const [showList, setShowList] = useState(false);
   const closeList = () => {setShowList(false);}
@@ -22,9 +22,7 @@ function Header() {
               </Nav.Item>
               <Nav.Item className='d-flex align-items-center'>
               {/* found this on codepen  https://codepen.io/kmuenster/pen/XWWeQGw*/}
-              <div className="searchBar"> 
-                <input id="searchQueryInput" type="text" name="searchQueryInput" placeholder="Search" />
-              </div>
+              <SearchBar />
               </Nav.Item>
               <Nav.Item>
                 <Link to="/create" className="nav-link">Create</Link>

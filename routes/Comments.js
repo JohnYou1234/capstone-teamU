@@ -1,5 +1,7 @@
 import express from 'express';
 const router = express();
+import validator from 'validator'
+
 // get all comments with post id as a parameter
 router.get('/viewAll/:id', async function (req, res) {
     try {
@@ -44,4 +46,21 @@ router.post('/create/:id', async function (req, res) {
         }
     }
 })
+router.get('/search', async (req, res) => {
+  const query = req.query.q; // Get the search query from the request URL query params
+  // Sanitize the search query
+  const sanitizedQuery = validator.escape(query);
+  try {
+    const Comment = req.db.Comment;
+    const comments = await Comment.find({ content: { $regex: sanitizedQuery, $options: 'i' } });
+    res.send({
+        'success': true,
+        'comments': comments
+    })
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 export default router;

@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import './Thread.css';
-// import format date from helper.js
-import {formatDate} from '../../helpers.js';
+import Comment from './Comment';
 function Comments(props) {
     const [comments, setComments] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -22,18 +21,7 @@ function Comments(props) {
             console.log(err)
         });
     }, [props.refresh, props.postId]);
-    const Comment = ({comment, index}) => {
-        return (
-            <div key={index} style={{backgroundColor: `${comment.bgColor}`}} className="comment">
-                <div className="comment-header">
-                    {comment.date ? <p>{formatDate(comment.date)}</p>: <p></p>} 
-                </div>
-                <div className="comment-content">
-                    <p>{comment.content}</p>
-                </div>
-            </div>
-        )
-    }
+
     return (
         <div className="thread-comments">
             <h3>Comments</h3>
