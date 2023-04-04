@@ -46,12 +46,12 @@ function BoardList(props) {
           </Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-        <div className='createBoard' onClick={handleCreateOpen}>
-            <span><FiPlus /></span>
-            <span>Create Board</span>
-        </div>
-        {/* filter bar */}
-        <FilterBar filterText={filterText} setFilterText={setFilterText}/>
+          <div className='createBoard' onClick={handleCreateOpen}>
+              <span><FiPlus /></span>
+              <span>Create Board</span>
+          </div>
+          {/* filter bar */}
+          <FilterBar filterText={filterText} setFilterText={setFilterText}/>
           <nav className='boardList'>
             <Link className='unstyledLink' to="/board/"><p>General</p></Link>
             {filteredBoards.map(board => {

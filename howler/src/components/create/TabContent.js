@@ -13,12 +13,6 @@ function TabContent(props) {
     const handlePostChange = (event) => {
         setPostText(event.target.value);
     };
-
-    const link = props.link;
-    const setLink = props.setLink;
-    const handleLinkChange = (event) => {
-        setLink(event.target.value);
-      };
     switch (tab) {
         case 'text':
           return (
@@ -29,10 +23,6 @@ function TabContent(props) {
             <>
                 <input onChange={handleImageLinkChange} type="text" className="create-post-input" placeholder="IMGUR LINK" value={imageLink}/>
             </>
-          );
-        case 'link':
-          return (
-            <input onChange={handleLinkChange} type="text" className="create-post-input" placeholder="Link URL" value={link} />
           );
         case 'poll':
           return (

@@ -18,12 +18,6 @@ function Tabs(props) {
         Image
         </button>
         <button
-        className={`create-post-tab ${tab === 'link' ? 'active' : ''}`}
-        onClick={() => handleTabChange('link')}
-        >
-        Link
-        </button>
-        <button
         className={`create-post-tab ${tab === 'poll' ? 'active' : ''}`}
         onClick={() => handleTabChange('poll')}
         >
