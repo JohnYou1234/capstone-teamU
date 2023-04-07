@@ -1,8 +1,7 @@
 import { formatDate } from "../../helpers.js";
 
 function Comment ({ comment, index, highlightQuery }) {
-    console.log(highlightQuery);
-  const content = highlightQuery
+    const content = highlightQuery
     ? comment.content.replace(
         new RegExp(`(${highlightQuery})`, "gi"),
         "<mark>$1</mark>"
@@ -19,7 +18,11 @@ function Comment ({ comment, index, highlightQuery }) {
         {comment.date ? <p>{formatDate(comment.date)}</p> : <p></p>}
       </div>
       <div className="comment-content">
-        <span dangerouslySetInnerHTML={{ __html: content }}></span>
+        {highlightQuery ? (
+            <span dangerouslySetInnerHTML={{ __html: content }}></span>
+        ) : (
+            <p>{content}</p>
+        )}
       </div>
     </div>
   );
