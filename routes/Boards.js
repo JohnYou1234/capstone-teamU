@@ -57,25 +57,21 @@ router.post('/create', async function (req, res) {
     }
   });
 
-// get board name based on id
 router.get('/getBoardName/:id', async function (req, res) {
     try {
-        const Board = req.db.Board;
-        const board = await Board.findOne({_id: req.params.id});
-        res.send({
-            "board": board,
-            'success': true
-        });
-    } catch {
-        (err) => {
-            res.send({
-                "success": false,
-                "message": "Error getting board"
-            });
-            return;
-        }
+      const Board = req.db.Board;
+      const board = await Board.findOne({_id: req.params.id});
+      if (!board) {
+        res.status(404).send({ success: false, message: 'Board not found' });
+        return;
+      }
+      res.send({ board: board, success: true });
+    } catch (err) {
+      console.error(err);
+      res.status(500).send({ success: false, message: 'Server error' });
     }
-});
+  });
+  
 
 // search for boards by name
 router.get('/search', async (req, res) => {

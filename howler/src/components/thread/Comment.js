@@ -1,15 +1,28 @@
-import {formatDate} from '../../helpers.js';
-const Comment = ({comment, index}) => {
-    return (
-        <div key={index} style={{backgroundColor: `${comment.bgColor}`}} className="comment">
-            <div className="comment-header">
-                {comment.date ? <p>{formatDate(comment.date)}</p>: <p></p>} 
-            </div>
-            <div className="comment-content">
-                <p>{comment.content}</p>
-            </div>
-        </div>
-    )
-}
+import { formatDate } from "../../helpers.js";
+
+function Comment ({ comment, index, highlightQuery }) {
+    console.log(highlightQuery);
+  const content = highlightQuery
+    ? comment.content.replace(
+        new RegExp(`(${highlightQuery})`, "gi"),
+        "<mark>$1</mark>"
+      )
+    : comment.content;
+
+  return (
+    <div
+      key={index}
+      style={{ backgroundColor: `${comment.bgColor}` }}
+      className="comment"
+    >
+      <div className="comment-header">
+        {comment.date ? <p>{formatDate(comment.date)}</p> : <p></p>}
+      </div>
+      <div className="comment-content">
+        <span dangerouslySetInnerHTML={{ __html: content }}></span>
+      </div>
+    </div>
+  );
+};
 
 export default Comment;

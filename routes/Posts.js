@@ -22,6 +22,32 @@ app.get('/viewAll', async function (req, res) {
     }
 })
 
+app.get('/viewAllGeneral', async function (req, res) {
+    try {
+        const Post = req.db.Post;
+        const posts = await Post.find({
+            $or: [
+                {optOutGen: {$exists: false}},
+                {optOutGen: false}
+            ]
+        }).sort({date: -1});
+        res.send({
+            "posts": posts,
+            'success': true
+        });
+    } catch {
+        (err) => {
+            res.send({
+                "success": false,
+                "message": "Error getting posts",
+                "err": err
+            });
+            return;
+        }
+    }
+});
+
+
 app.post('/create', async function (req, res) {
     const Post = req.db.Post;
     const newPost = new Post({
@@ -32,7 +58,8 @@ app.post('/create', async function (req, res) {
         category: req.body.category,
         type: req.body.type,
         board: req.body.board,
-        boardName: req.body.boardName
+        boardName: req.body.boardName,
+        optOutGen: req.body.optOutGen
     })
     try {
         await newPost.save();
