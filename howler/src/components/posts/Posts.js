@@ -27,7 +27,7 @@ function Posts() {
     };
   
     const {boardId} = useParams();
-    let link = boardId === undefined ? '/api/posts/viewAll' : `/api/posts/viewAllPosts/${boardId}`;
+    let link = boardId === undefined ? '/api/posts/viewAllGeneral' : `/api/posts/viewAllPosts/${boardId}`;
   
     useEffect(() => {
       fetch(link)

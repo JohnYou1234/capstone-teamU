@@ -34,7 +34,7 @@ function FilterBox(props) {
   };
   
 
-  const categories = ["Advice", "Emotional Support", "Introduction", "Rant/Vent", "Self Improvement"];
+  const categories = ["Advice", "Emotional Support", "Introduction", "Question", "Rant/Vent", "Self Improvement"];
   const postTypes = ["Text", "Image", "Poll"];
 
   return (

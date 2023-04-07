@@ -35,3 +35,7 @@ h3 {
   text-decoration: none;
   color: black;
 }
+
+.highlighted {
+  background-color: yellow;
+}

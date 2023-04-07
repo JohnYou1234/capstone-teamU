@@ -19,7 +19,8 @@ async function dbConnect() {
         type: { type: String, default: 'text' },
         board: { type: mongoose.Schema.Types.ObjectId, ref: 'Board' },
         boardName: String,
-        date: { type: Date, default: Date.now }
+        date: { type: Date, default: Date.now },
+        optOutGen: { type: Boolean, default: false },
     });   
 
     const CommentSchema = new mongoose.Schema({

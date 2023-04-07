@@ -71,7 +71,7 @@ function SearchResults() {
           <h3>Posts</h3>
           {posts.length === 0 && isLoading && <div className='center-div'><Spinner animation="border" /></div>}
           {posts.length !== 0 && posts.map((post, index) => (
-            <PostPreview key={index} postData={post} />
+            <PostPreview key={index} postData={post} highlightQuery={query} />
           ))}
           {posts.length === 0 && !isLoading && <p>No posts found</p>}
         </>
@@ -82,7 +82,7 @@ function SearchResults() {
           {comments.length === 0 && isLoading && <div className='center-div'><Spinner animation="border" /></div>}
           {comments.length !== 0 && comments.map((comment, index) => (
             <Link key={index} className="unstyled-link" to={`/thread/${comment.post}`}>
-              <Comment comment={comment} index={index} />
+              <Comment comment={comment} index={index} highlightQuery={query} />
             </Link>
           ))}
           {comments.length === 0 && !isLoading && <p>No comments found</p>}

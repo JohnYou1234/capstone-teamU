@@ -4,6 +4,7 @@ import Tabs from './Tabs';
 import TabContent from './TabContent';
 import ColorPalette from './ColorPalette';
 import BoardSelect from './BoardSelect';
+import ContentGuidelines from './ContentGuidelines';
 function CreatePost() {
   const [feedback, setFeedback] = useState('');
 
@@ -23,6 +24,7 @@ function CreatePost() {
   const handleCategoryChange = (event) => {
     setCategory(event.target.value);
   };
+  const categories = ["Advice", "Emotional Support", "Introduction", "Question", "Rant/Vent", "Self Improvement"];
 
   const [title, setTitle] = useState('');
   const handleTitleChange = (event) => {
@@ -49,6 +51,7 @@ function CreatePost() {
       bgColor,
       board: board.split(',')[0],
       boardName: board.split(',')[1],
+      optOutGen: optOutOfGeneral
       };
     if (tab === 'text') {
       post.content = postText;
@@ -62,6 +65,11 @@ function CreatePost() {
     }
     if (post.content === ""|| post.category === 'Select a category' || post.title === '' || post.bgColor === '' || post.board === 'Select a board') {
       alert('Please fill out all fields');
+      return;
+    }
+
+    if (post.content.length > 4000 || post.title.length > 100) {
+      alert('Title must be less than 100 characters and content must be less than 4000 characters');
       return;
     }
     handleDisable(true);
@@ -83,33 +91,48 @@ function CreatePost() {
         setCategory('Select a category');
         setTitle('');
         setBgColor('#E6CA85');
+        setBoard('Select a board');
+        setOptOutOfGeneral(false);
       })
       .catch((err) => {
         setFeedback('Error creating post');
         handleDisable(false);
       });
   }
+
+  const [optOutOfGeneral, setOptOutOfGeneral] = useState(false);
+  const handleOptOutOfGeneral = () => {
+    setOptOutOfGeneral(!optOutOfGeneral);
+  }
   return (
     <div className="create-post-container">
       <h2 className="create-post-title">Create a Post</h2>
       <input type="text" className="create-post-input" placeholder="Title" onChange={handleTitleChange} value={title}/>
-
       <Tabs tab={tab} handleTabChange={handleTabChange} />
       <TabContent tab={tab} setPostText={setPostText} postText={postText} setImageLink={setImageLink} imageLink={imageLink} setLink={setLink} link={link} />
       <div>
         <div>
           <select className="create-post-input" value={category} onChange={handleCategoryChange}>
             <option disabled>Select a category</option>
-            <option value="Advice">Advice</option>
-            <option value="Emotional Support">Emotional Support</option>
-            <option value="Introduction">Introduction</option>
-            <option value="Rant/Vent">Rant/Vent</option>
-            <option value="Self Improvement">Self Improvement</option>
+            {categories.map((category) => (
+              <option key={category} value={category}>{category}</option>
+            ))}
           </select>
         </div>
         <BoardSelect board={board} handleBoardChange={handleBoardChange}/>
       </div>
       <ColorPalette colorList={colorList} bgColor={bgColor} handleBgColorChange={handleBgColorChange} includeBtn={true}/>
+      <label>
+      <input
+        type="checkbox"
+        checked={optOutOfGeneral}
+        onChange={() => {
+          handleOptOutOfGeneral()
+        }}
+      />
+      {' Opt post out of general'}
+    </label>
+
       <button
         onClick={handlePostSubmit}
         className={`create-post-button ${isDisabled ? 'disabled' : ''}`}
@@ -119,6 +142,7 @@ function CreatePost() {
       </button>
       <span>{feedback}</span>
     </div>
+
   );
 };
 

@@ -1,0 +1,42 @@
+.content-guidelines-wrapper {
+    margin-top: 50px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    width: 20%;
+    margin-left: 0px;
+    margin-right: auto;
+    height: fit-content;
+  }
+  
+  .content-guidelines-title {
+    margin-bottom: 10px;
+    font-size: 20px
+  }
+  
+  .rules-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .guideline {
+    border: 1px solid #ddd;
+    padding: 10px;
+  }
+  
+  .guideline-summary {
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .guideline-details {
+    margin-top: 10px;
+  }  
+  
+  @media screen and (max-width: 1361px) {
+    .content-guidelines-wrapper {
+      width: 80%;
+      margin-left: auto;
+    }
+  }
