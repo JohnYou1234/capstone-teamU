@@ -31,6 +31,7 @@ router.post('/create/:id', async function (req, res) {
     })
     try {
         await newComment.save();
+        
         res.send({
             "success": true,
             "message": "Comment created"
@@ -52,7 +53,7 @@ router.get('/search', async (req, res) => {
   const sanitizedQuery = validator.escape(query);
   try {
     const Comment = req.db.Comment;
-    const comments = await Comment.find({ content: { $regex: sanitizedQuery, $options: 'i' } });
+    const comments = await Comment.find({ content: { $regex: sanitizedQuery, $options: 'i' } }).sort({ date: -1 });
     res.send({
         'success': true,
         'comments': comments

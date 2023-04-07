@@ -120,7 +120,6 @@ app.get('/viewAllPosts/:id', async function (req, res) {
     }
 });
 
-// get all posts with a certain search query in its title or in the text content
 app.get('/search', async (req, res) => {
     const query = req.query.q;
     const sanitizedQuery = validator.escape(query);
@@ -132,7 +131,8 @@ app.get('/search', async (req, res) => {
           { title: { $regex: sanitizedQuery, $options: 'i' } },
           { content: { $regex: sanitizedQuery, $options: 'i' }, $or: [{ type: 'text' }, { type: { $exists: false } }] },
         ],
-      });
+      })
+      .sort({ date: -1 });
   
       res.send({
         success: true,
@@ -143,5 +143,6 @@ app.get('/search', async (req, res) => {
       res.status(500).json({ message: 'Server error' });
     }
   });
+  
   
 export default app;

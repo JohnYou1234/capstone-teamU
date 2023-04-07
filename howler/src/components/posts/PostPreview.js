@@ -46,21 +46,24 @@ function PostPreview (props) {
     <Link to={`/thread/${data._id}`} className="post-link">
       <div className="post" style={{ backgroundColor: `${bcolor}` }} onClick={() => {console.log("hello")}}>
         <p className="category">{data.category}</p>
-        <p className="title" dangerouslySetInnerHTML={{ __html: highlightedTitle }} />
+        {parsePostContent(highlightedTitle, props.highlightQuery, "title")}
         <p className='boardName'>{boardName}</p>
         <p className="date">{formatDate(data.date)}</p>
-        {parsePostContent(highlightedContent, props.highlightQuery)}
+        {parsePostContent(highlightedContent, props.highlightQuery, "content", data.type==="image")}
       </div>
     </Link>
   );
 }
 
-function parsePostContent(content, highlightQuery) {
-  if (highlightQuery) {
-    return <p className="content" dangerouslySetInnerHTML={{ __html: highlightText(cutContentShort(content), highlightQuery) }} />;
-  } else {
-    return <p className="content">{cutContentShort(content)}</p>;
-  }
+function parsePostContent(content, highlightQuery, type, isImage) {
+    if (isImage) {
+        return <img className='preview-img' src={content} alt="post content" />;
+    }
+    if (highlightQuery) {
+        return <p className={type} dangerouslySetInnerHTML={{ __html: highlightText(cutContentShort(content), highlightQuery) }} />;
+    } else {
+        return <p className={type}>{cutContentShort(content)}</p>;
+    }
 }
 
 function cutContentShort(content) {
