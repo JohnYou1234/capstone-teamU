@@ -1,6 +1,7 @@
 import { formatDate } from "../../helpers.js";
-
-function Comment ({ comment, index, highlightQuery }) {
+import ContentDropdown from '../posts/ContentDropdown';
+import './Comment.css';
+function Comment ({ comment, index, highlightQuery, first, isLink }) {
     const content = highlightQuery
     ? comment.content.replace(
         new RegExp(`(${highlightQuery})`, "gi"),
@@ -14,8 +15,9 @@ function Comment ({ comment, index, highlightQuery }) {
       style={{ backgroundColor: `${comment.bgColor}` }}
       className="comment"
     >
-      <div className="comment-header">
-        {comment.date ? <p>{formatDate(comment.date)}</p> : <p></p>}
+      <div className="flex-row">
+          {comment.date ? <p>{formatDate(comment.date)}</p> : <p></p>}
+          {(!first && !highlightQuery) && (!isLink) && <ContentDropdown dataId={comment._id} />}
       </div>
       <div className="comment-content">
         {highlightQuery ? (

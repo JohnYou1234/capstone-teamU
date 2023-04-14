@@ -1,7 +1,9 @@
 import { Modal, Button, Form } from 'react-bootstrap';
 import './BoardList.css';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import AuthContext from '../../AuthContext';
 function CreateBoard(props) {
+    const { isLoggedIn } = useContext(AuthContext);
     const handleClose = props.handleClose;
     const show = props.show;
 
@@ -26,6 +28,13 @@ function CreateBoard(props) {
     const handleSubmit = () => {
         if (boardName.length === 0 || boardDescription.length === 0) {
           changeFeedback('Please fill out all fields');
+          setTimeout(() => {
+            changeFeedback('');
+          }, 2000);
+          return;
+        }
+        if (!isLoggedIn) {
+          changeFeedback('Please login before creating board');
           setTimeout(() => {
             changeFeedback('');
           }, 2000);

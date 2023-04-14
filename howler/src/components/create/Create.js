@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import './create.css';
 import Tabs from './Tabs';
 import TabContent from './TabContent';
 import ColorPalette from './ColorPalette';
 import BoardSelect from './BoardSelect';
-import ContentGuidelines from './ContentGuidelines';
+import AuthContext from '../../AuthContext';
+
 function CreatePost() {
+  const { isLoggedIn, userId } = useContext(AuthContext);
   const [feedback, setFeedback] = useState('');
 
   const [tab, setTab] = useState('text');
@@ -47,7 +49,7 @@ function CreatePost() {
       type: tab,
       title,
       category,
-      author: "Anonymous",
+      author: userId,
       bgColor,
       board: board.split(',')[0],
       boardName: board.split(',')[1],
@@ -133,13 +135,15 @@ function CreatePost() {
       {' Opt post out of general'}
     </label>
 
-      <button
+{      isLoggedIn ? <button
         onClick={handlePostSubmit}
         className={`create-post-button ${isDisabled ? 'disabled' : ''}`}
         disabled={isDisabled}
       >
         Create
       </button>
+      :
+      <p>Must be logged in to create post!</p>}
       <span>{feedback}</span>
     </div>
 

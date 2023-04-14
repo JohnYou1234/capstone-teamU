@@ -18,25 +18,20 @@ function Tab({ name, active, onClick }) {
     </div>
   );
 }
+function Tabs({ activeTab, handleTabClick, noBoard }) {
+  let categories = ["Posts", "Comments", "Boards"];
+  if (noBoard) categories = ["Posts", "Comments"]
 
-function Tabs({ activeTab, handleTabClick }) {
   return (
     <div className="tab-wrapper">
-      <Tab
-        name="Posts"
-        active={activeTab === 'Posts'}
-        onClick={() => handleTabClick('Posts')}
-      />
-      <Tab
-        name="Comments"
-        active={activeTab === 'Comments'}
-        onClick={() => handleTabClick('Comments')}
-      />
-      <Tab
-        name="Boards"
-        active={activeTab === 'Boards'}
-        onClick={() => handleTabClick('Boards')}
-      />
+      {categories.map((category) => (
+        <Tab
+          key={category}
+          name={category}
+          active={activeTab === category}
+          onClick={() => handleTabClick(category)}
+        />
+      ))}
     </div>
   );
 }

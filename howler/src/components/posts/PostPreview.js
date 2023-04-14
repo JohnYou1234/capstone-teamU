@@ -1,15 +1,16 @@
 import './post.css'
 import {Link} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {formatDate} from '../../helpers.js';
 import { useEffect, useState } from 'react';
-
+import ContentDropdown from './ContentDropdown';
 function PostPreview (props) {
   const data = props.postData;
   const bcolor = data.bgColor;
   const [boardName, setBoardName] = useState('');
   const [highlightedTitle, setHighlightedTitle] = useState('');
   const [highlightedContent, setHighlightedContent] = useState('');
-
+  const navigate = useNavigate();
   useEffect(() => {
     if (data.boardName) {
       setBoardName(data.boardName);
@@ -42,16 +43,26 @@ function PostPreview (props) {
     }
   }, [props.highlightQuery, data.title, data.content]);
 
+  const handleClick = (e) => {
+      if (e.target.className == "ellipsis" || e.target.className == "dd-toggle" || e.target.className == "dd-item") {
+          return;
+      } else {
+          navigate(`/thread/${data._id}`);
+      }
+  };
   return (
-    <Link to={`/thread/${data._id}`} className="post-link">
-      <div className="post" style={{ backgroundColor: `${bcolor}` }} onClick={() => {console.log("hello")}}>
-        <p className="category">{data.category}</p>
+    <div className="post-link" onClick={handleClick}>
+      <div className="post" style={{ backgroundColor: `${bcolor}` }}>
+        <div className='flex-row'>
+          <p className="category">{data.category}</p>
+          <ContentDropdown dataId={data._id} isPost={true}/>
+        </div>
         {parsePostContent(highlightedTitle, props.highlightQuery, "title")}
         <p className='boardName'>{boardName}</p>
         <p className="date">{formatDate(data.date)}</p>
         {parsePostContent(highlightedContent, props.highlightQuery, "content", data.type==="image")}
       </div>
-    </Link>
+    </div>
   );
 }
 
