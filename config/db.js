@@ -14,18 +14,18 @@ async function dbConnect() {
         title: String,
         content: String,
         bgColor: String,
-        author: String,
+        author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
         category: String,
         type: { type: String, default: 'text' },
         board: { type: mongoose.Schema.Types.ObjectId, ref: 'Board' },
         boardName: String,
-        date: { type: Date, default: Date.now },
-        optOutGen: { type: Boolean, default: false },
+        date: { type: Date, default: Date.now }
     });   
 
     const CommentSchema = new mongoose.Schema({
         content: String,
         bgColor: String,
+        author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
         date: { type: Date, default: Date.now },
         post: { type: mongoose.Schema.Types.ObjectId, ref: 'Post' }
     });
@@ -35,7 +35,23 @@ async function dbConnect() {
         description: String,
         date: { type: Date, default: Date.now }
     });
-
+    const UserSchema = new mongoose.Schema({
+        email: String,
+        password: String,
+        boards: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Board' }],
+        savedPosts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }],
+        savedComments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }]
+    });
+    
+    const VerificationSchema = new mongoose.Schema({
+        email: String,
+        code: String,
+        password: String,
+        expiresAt: Date
+    });
+    
+    db.User = mongoose.model('User', UserSchema);
+    db.Verification = mongoose.model('Verification', VerificationSchema);
     db.Post = mongoose.model('Post', PostSchema);
     db.Comment = mongoose.model('Comment', CommentSchema);
     db.Board = mongoose.model('Board', BoardSchema);

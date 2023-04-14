@@ -27,7 +27,8 @@ router.post('/create/:id', async function (req, res) {
     const newComment = new Comment({
         content: req.body.content,
         post: req.params.id,
-        bgColor: req.body.bgColor
+        bgColor: req.body.bgColor,
+        author: req.body.author
     })
     try {
         await newComment.save();
@@ -48,8 +49,7 @@ router.post('/create/:id', async function (req, res) {
     }
 })
 router.get('/search', async (req, res) => {
-  const query = req.query.q; // Get the search query from the request URL query params
-  // Sanitize the search query
+  const query = req.query.q; 
   const sanitizedQuery = validator.escape(query);
   try {
     const Comment = req.db.Comment;
