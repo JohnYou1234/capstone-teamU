@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useState, useEffect} from "react";
 import {useParams} from "react-router-dom";
 import "./Thread.css"; // import CSS file
 import Comments from "./Comments"; 
@@ -7,8 +7,10 @@ import { AiOutlineClose } from 'react-icons/ai';
 import CommentInput from "./CommentInput";
 import {formatDate} from '../../helpers.js';
 import { Spinner } from 'react-bootstrap';
-
+import AuthContext from '../../AuthContext';
+import ContentDropdown from '../posts/ContentDropdown';
 function Thread() {
+    const {isLoggedIn, userId} = useContext(AuthContext);
     const [post, setPost] = useState({});
     const [loading, setLoading] = useState(true);
     const {postId} = useParams();
@@ -16,20 +18,22 @@ function Thread() {
     const [boardName, setBoardName] = useState('');
     useEffect(() => {
         fetch(`/api/posts/viewOne/${postId}`)
-        .then(res => res.json())
-        .then(data => {
-            if (data.success) {
-                setPost(data.post);
-                setLoading(false);
-            } else {
-                setLoading(false);
-                throw new Error('Error loading post');
-            }
-        })
-        .catch(err => {
-            console.log(err)
-        });
-        if (post.board) {
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    setPost(data.post);
+                    setLoading(false);
+                } else {
+                    setLoading(false);
+                    throw new Error('Error loading post');
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            });
+        if (post.boardName) {
+            setBoardName(post.boardName);
+        } else if (post.board) {
             fetch(`/api/boards/getBoardName/${post.board}`)
                 .then(res => res.json())
                 .then(data => {
@@ -42,10 +46,11 @@ function Thread() {
                 .catch(err => {
                     console.log(err);
                 });
-            } else {
-                setBoardName('General');
-            }
-    }, [post.board, postId]);
+        } else {
+            setBoardName('General');
+        }
+    }, [post.board, post.boardName, postId]);
+    
     return (
         <>
             {loading ? (
@@ -56,6 +61,7 @@ function Thread() {
                         <AiOutlineClose /> Close
                     </Link>
                     <div className="thread-post" style={{ backgroundColor: `${post.bgColor}`}} >
+                        <ContentDropdown dataId={postId} isPost={true}/>
                         <div className="thread-post-header">
                             <h2>{post.title}</h2>
                             <p>{boardName}</p>
@@ -65,7 +71,8 @@ function Thread() {
                             {parsePostContent(post)}
                         </div>
                     </div>
-                    <CommentInput postId={postId} setRefresh={setRefresh} refresh={refresh}/>
+{                    isLoggedIn ? <CommentInput postId={postId} setRefresh={setRefresh} refresh={refresh} userId={userId} isLoggedIn={isLoggedIn}/>
+                    : <p className='center'>Please login to comment</p>}
                     <Comments postId={postId} refresh={refresh}/>
                 </div>
             )}

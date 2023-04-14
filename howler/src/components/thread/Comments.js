@@ -21,14 +21,13 @@ function Comments(props) {
             console.log(err)
         });
     }, [props.refresh, props.postId]);
-
     return (
         <div className="thread-comments">
             <h3>Comments</h3>
             {comments.length === 0 ? 
-            <Comment comment={{content: 'No comments yet', bgColor: '#ffffff'}} index={0}/> :
+            <Comment comment={{content: 'No comments yet', bgColor: '#ffffff'}} first={true} index={0}/> :
             comments.map((comment, index) => {
-                return <Comment comment={comment} index={index} key={index}/>;
+                return <Comment comment={comment} index={index} key={index} />;
             })}
         </div>
     )

@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import './SearchResults.css';
-import PostPreview from '../posts/PostPreview';
-import Comment from '../thread/Comment';
-import { Link, useParams } from 'react-router-dom';
-import Tabs from './Tabs';
+import React, {useState, useContext, useEffect} from 'react';
+import {Link} from 'react-router-dom';
+import AuthContext from '../../AuthContext';
+import Tabs from '../results/Tabs';
 import { Spinner } from 'react-bootstrap';
 import FilterBox from '../posts/FilterBox';
+import PostPreview from '../posts/PostPreview';
+import Comment from '../thread/Comment';
 
-function SearchResults() {
-  const [activeTab, setActiveTab] = useState('Posts');
+function ViewProfile() {
+    const { userId } = useContext(AuthContext);
+
+    
+    const [activeTab, setActiveTab] = useState('Posts');
   const [comments, setComments] = useState([]);
   const [posts, setPosts] = useState([]);
-  const [boards, setBoards] = useState([]);
   const [isLoading, setLoading] = useState(true);
-  const { query } = useParams();
-
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedPostType, setSelectedPostType] = useState("All");
   const handleCategorySelect = (category) => {
@@ -27,35 +27,34 @@ function SearchResults() {
   
   useEffect(() => {
     setLoading(true);
-    if (query !== "") {
-      if (activeTab === 'Comments') {
-        fetchData(`/api/comments/search?q=${query}`)
-          .then((data) => setComments(data.comments))
-          .catch((err) => console.log(err))
-          .finally(() => setLoading(false));
-      } else if (activeTab === 'Posts') {
-        fetchData(`/api/posts/search?q=${query}`)
-          .then((data) => setPosts(data.posts))
-          .catch((err) => console.log(err))
-          .finally(() => setLoading(false));
-      } else if (activeTab === 'Boards') {
-        fetchData(`/api/boards/search?q=${query}`)
-          .then((data) => setBoards(data.boards))
-          .catch((err) => console.log(err))
-          .finally(() => setLoading(false));
-      }
+    if (activeTab === 'Comments') {
+    fetchData(`/api/users/comments/byuser`)
+        .then((data) => setComments(data.comments))
+        .catch((err) => console.log(err))
+        .finally(() => setLoading(false));
+    } else if (activeTab === 'Posts') {
+    fetchData(`/api/users/posts/byuser`)
+        .then((data) => setPosts(data.posts))
+        .catch((err) => console.log(err))
+        .finally(() => setLoading(false));
     } 
     setLoading(false);
-  }, [query, activeTab]);
+  }, [userId, activeTab]);
   const fetchData = (endpoint) => {
-    return fetch(endpoint)
-      .then((res) => {
-        if (res.status === 200) {
-          return res.json();
-        } else {
-          throw new Error('Error loading data');
+    return fetch(endpoint, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({userId})
+        })
+        .then((res) => {
+            if (res.status !== 200) {
+            throw new Error('Error fetching data');
+            }
+            return res.json();
         }
-      });
+    );
   };
 
   const handleTabClick = (tabName) => {
@@ -86,22 +85,22 @@ function SearchResults() {
   };
   const filteredPosts = filterResults(posts);
   const filteredComments = filterResults(comments);
-    
+    const userExists = userId === null ? false : true;
   return (
-    <div className="results">
+    userExists ? <div className="results">
       <FilterBox onCategorySelect={handleCategorySelect} onPostTypeSelect={handlePostTypeSelect} />
-      <h3>Search results for "{query}"</h3>
       <Tabs
         activeTab={activeTab}
         handleTabClick={handleTabClick}
         activeStyle={activeStyle}
+        noBoard={true}
       />
       {activeTab === 'Posts' && (
         <>
           <h3>Posts</h3>
           {filteredPosts.length === 0 && isLoading && <div className='center-div'><Spinner animation="border" /></div>}
           {filteredPosts.length !== 0 && filteredPosts.map((post, index) => (
-            <PostPreview key={index} postData={post} highlightQuery={query} />
+            <PostPreview key={index} postData={post}/>
           ))}
           {filteredPosts.length === 0 && !isLoading && <p>No posts found</p>}
         </>
@@ -112,29 +111,18 @@ function SearchResults() {
           {filteredComments.length === 0 && isLoading && <div className='center-div'><Spinner animation="border" /></div>}
           {filteredComments.length !== 0 && filteredComments.map((comment, index) => (
             <Link key={index} className="unstyled-link" to={`/thread/${comment.post}`}>
-              <Comment comment={comment} index={index} highlightQuery={query} />
+              <Comment comment={comment} index={index}/>
             </Link>
           ))}
           {filteredComments.length === 0 && !isLoading && <p>No comments found</p>}
         </>
       )}
-      {activeTab === 'Boards' && (
-        <>
-          <h3>Boards</h3>
-          {boards.length === 0 && isLoading && <div className='center-div'><Spinner animation="border" /></div>}
-          {boards.length !== 0 && boards.map((board, index) => (
-            <Link key={index} className="unstyled-link" to={`/board/${board._id}`}>
-              <div className="board" key={index}>
-                <label>{board.name}</label>
-                <p>{board.description}</p>
-              </div>
-            </Link>
-          ))}
-          {boards.length === 0 && !isLoading && <p>No boards found</p>}
-        </>
-      )}
     </div>
-  );
-}  
+    :
+    <div className="results">
+        <h3>Log in to view your profile</h3>
+    </div>
+    );
+}
 
-export default SearchResults;
+export default ViewProfile;

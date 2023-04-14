@@ -14,6 +14,7 @@ function CommentInput(props) {
         setCommentInput(e.target.value);
     }
     const postId = props.postId;
+    const userId = props.userId;
     const handleSubmit = (e) => {
         e.preventDefault();
         if (commentInput.length === 0) {
@@ -28,12 +29,12 @@ function CommentInput(props) {
             body: JSON.stringify({
                 content: commentInput,
                 bgColor: bgColor,
-                post: postId
+                post: postId,
+                author: userId
             })
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data);
             setCommentInput("");
             setFeedback(data.message);
             handleBgColorChange('white');

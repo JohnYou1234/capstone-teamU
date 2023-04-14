@@ -1,0 +1,52 @@
+.post-preview-dd {
+  position: relative;
+}
+
+.dd-toggle {
+  width: fit-content;
+  height: fit-content;
+  padding: .3rem;
+  cursor: pointer;
+  margin-left: auto;
+  margin-top: 0px;
+}
+
+.dd-toggle:hover {
+  background-color: rgb(159, 156, 156);
+}
+
+.dd-menu {
+  position: absolute;
+  top: calc(100% + 5px);
+  right: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 0.5rem;
+  z-index: 1;
+  min-width: 100px;
+}
+
+.dd-item {
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+
+}
+.dd-item:hover {
+  background-color: #eee;
+}
+
+.move-right {
+  margin-left: auto;
+}
+
+.ellipsis {
+  width: 6px;
+  height: 6px;
+  background-color: #000;
+  margin: 2px 0;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 2px 4px 2px 0;
+
+}

@@ -1,4 +1,4 @@
-.search-results {
+.results {
   max-width: 800px;
   margin-top: 3rem;
   margin-left: auto;
@@ -7,30 +7,30 @@
   flex-direction: column;
   }
 
-.search-results h3 {
+.results h3 {
   font-size: 24px;
   margin-bottom: 10px;
   margin-left: auto !important;
   margin-right: auto !important;
 }
 
-.search-results .tab {
+.results .tab {
   display: inline-block;
   padding: 10px 20px;
   cursor: pointer;
 }
 
-.search-results .tab.active {
+.results .tab.active {
   background-color: rgb(166, 121, 202);
   color: #fff;
   border-radius: 20px;
 }
 
-.search-results .tab-content {
+.results .tab-content {
   display: none;
 }
 
-.search-results .tab-content.active {
+.results .tab-content.active {
   display: block;
 }
 
