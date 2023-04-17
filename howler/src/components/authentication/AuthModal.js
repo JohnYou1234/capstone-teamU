@@ -1,5 +1,5 @@
-import React, { useState, useContext } from 'react';
-import { Modal, Button, Form } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Modal } from 'react-bootstrap';
 import './AuthModal.css';
 import Login from './Login';
 import Signup from './Signup';

@@ -13,8 +13,14 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userId, setUserId] = useState(null);
   const [showAuthModal, setShowAuthModal] = useState(false);
+  const [showReport, setShowReport] = useState(false);
   return (
-    <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn, userId, setUserId, showAuthModal, setShowAuthModal }}>
+    <AuthContext.Provider value={{ 
+    isLoggedIn, setIsLoggedIn, 
+    userId, setUserId, 
+    showAuthModal, setShowAuthModal, 
+    showReport, setShowReport 
+    }}>
       <div className="App">
           <Header />
           <Routes>

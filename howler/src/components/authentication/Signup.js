@@ -136,7 +136,7 @@ function Signup({ handleSwitch }) {
         </Form>
         <div className='vert-center'>
           <div className="auth-modal-switch">
-            Already have an account? <a href="#" onClick={handleSwitch}>Login</a>
+            Already have an account? <a onClick={handleSwitch}>Login</a>
           </div>
         </div>
       </Modal.Body>

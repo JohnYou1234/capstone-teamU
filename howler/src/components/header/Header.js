@@ -14,7 +14,7 @@ function Header() {
   const openList = () => setShowList(true);
   const openAuthModal = () => setShowAuthModal(true);
   const closeAuthModal = () => setShowAuthModal(false);
-  const { isLoggedIn, showAuthModal, setShowAuthModal } = useContext(AuthContext);
+  const { isLoggedIn, showAuthModal, setShowAuthModal} = useContext(AuthContext);
 
   return (
     <>

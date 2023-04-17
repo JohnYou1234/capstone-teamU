@@ -1,0 +1,16 @@
+.selected {
+    background-color: #212529;
+}
+
+.reportBtn {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.center-col {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
