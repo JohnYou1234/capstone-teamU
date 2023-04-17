@@ -50,11 +50,20 @@ async function dbConnect() {
         expiresAt: Date
     });
     
+    const ReportSchema = new mongoose.Schema({
+        type: String,
+        text: String,
+        date: { type: Date, default: Date.now },
+        post: { type: mongoose.Schema.Types.ObjectId, ref: 'Post' },
+        comment: { type: mongoose.Schema.Types.ObjectId, ref: 'Comment' },
+        user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+    });
     db.User = mongoose.model('User', UserSchema);
     db.Verification = mongoose.model('Verification', VerificationSchema);
     db.Post = mongoose.model('Post', PostSchema);
     db.Comment = mongoose.model('Comment', CommentSchema);
     db.Board = mongoose.model('Board', BoardSchema);
+    db.Report = mongoose.model('Report', ReportSchema);
     console.log("Created DB Schemas and Models");
 }
 

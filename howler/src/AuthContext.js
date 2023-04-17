@@ -7,6 +7,8 @@ const AuthContext = createContext({
   setUserId: () => {},
   showAuthModal: false,
   setShowAuthModal: () => {},
+  setShowReport: () => {},
+  showReport: false,
 });
 
 export default AuthContext;

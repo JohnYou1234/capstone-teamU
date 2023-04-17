@@ -38,7 +38,6 @@ function ViewProfile() {
         .catch((err) => console.log(err))
         .finally(() => setLoading(false));
     } 
-    setLoading(false);
   }, [userId, activeTab]);
   const fetchData = (endpoint) => {
     return fetch(endpoint, {
@@ -98,23 +97,35 @@ function ViewProfile() {
       {activeTab === 'Posts' && (
         <>
           <h3>Posts</h3>
-          {filteredPosts.length === 0 && isLoading && <div className='center-div'><Spinner animation="border" /></div>}
-          {filteredPosts.length !== 0 && filteredPosts.map((post, index) => (
-            <PostPreview key={index} postData={post}/>
-          ))}
-          {filteredPosts.length === 0 && !isLoading && <p>No posts found</p>}
+          {isLoading ? (
+            <div className="center-div">
+              <Spinner animation="border" />
+            </div>
+          ) : filteredPosts.length === 0 ? (
+            <p>No posts found</p>
+          ) : (
+            filteredPosts.map((post, index) => (
+              <PostPreview key={index} postData={post} />
+            ))
+          )}
         </>
       )}
       {activeTab === 'Comments' && (
         <>
           <h3>Comments</h3>
-          {filteredComments.length === 0 && isLoading && <div className='center-div'><Spinner animation="border" /></div>}
-          {filteredComments.length !== 0 && filteredComments.map((comment, index) => (
-            <Link key={index} className="unstyled-link" to={`/thread/${comment.post}`}>
-              <Comment comment={comment} index={index}/>
-            </Link>
-          ))}
-          {filteredComments.length === 0 && !isLoading && <p>No comments found</p>}
+          {isLoading ? (
+              <div className="center-div">
+                <Spinner animation="border" />
+              </div>
+            ) : filteredComments.length === 0 ? (
+              <p>No comments found</p>
+            ) : (
+              filteredComments.map((comment, index) => (
+                <Link key={index} className="unstyled-link" to={`/thread/${comment.post}`}>
+                  <Comment comment={comment} index={index} />
+                </Link>
+              ))
+            )}
         </>
       )}
     </div>

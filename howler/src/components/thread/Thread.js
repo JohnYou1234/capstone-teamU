@@ -9,8 +9,13 @@ import {formatDate} from '../../helpers.js';
 import { Spinner } from 'react-bootstrap';
 import AuthContext from '../../AuthContext';
 import ContentDropdown from '../posts/ContentDropdown';
+import CreateReport from '../Report/CreateReport';
 function Thread() {
     const {isLoggedIn, userId} = useContext(AuthContext);
+    const [showReport, setShowReport] = useState(false);
+
+    const handleReportClose = () => setShowReport(false);
+    const handleReportShow = () => setShowReport(true);
     const [post, setPost] = useState({});
     const [loading, setLoading] = useState(true);
     const {postId} = useParams();
@@ -56,12 +61,13 @@ function Thread() {
             {loading ? (
                 <div className='spinner center-div'><Spinner animation="border" role="status"/></div>
             ) : (
+                <>
                 <div className="thread-container">
                     <Link to="/" className="close-button">
                         <AiOutlineClose /> Close
                     </Link>
                     <div className="thread-post" style={{ backgroundColor: `${post.bgColor}`}} >
-                        <ContentDropdown dataId={postId} isPost={true}/>
+                        <ContentDropdown dataId={postId} isPost={true} handleReportOpen={handleReportShow}/>
                         <div className="thread-post-header">
                             <h2>{post.title}</h2>
                             <p>{boardName}</p>
@@ -75,6 +81,8 @@ function Thread() {
                     : <p className='center'>Please login to comment</p>}
                     <Comments postId={postId} refresh={refresh}/>
                 </div>
+                <CreateReport show={showReport} dataId={postId} isPost={true} handleClose={handleReportClose}/>
+                </>
             )}
         </>
     );

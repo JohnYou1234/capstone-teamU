@@ -20,7 +20,7 @@ function Login({ handleSwitch }, props) {
       body: JSON.stringify({ email, password }),
     })
       .then(async (res) => {
-        if (res.status == 400) {
+        if (res.status === 400) {
           const data = await res.json();
           throw new Error(data.message)
         }
@@ -92,7 +92,7 @@ function Login({ handleSwitch }, props) {
             </div>
 
             <div className="login-modal-sign-up">
-            Don't have an account? <a href="#" onClick={handleSwitch}>Sign up</a>
+            Don't have an account? <a onClick={handleSwitch}>Sign up</a>
             </div>
         </div>
       </Modal.Body>

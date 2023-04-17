@@ -1,15 +1,18 @@
 import './post.css'
-import {Link} from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import {formatDate} from '../../helpers.js';
 import { useEffect, useState } from 'react';
 import ContentDropdown from './ContentDropdown';
+import CreateReport from '../Report/CreateReport';
 function PostPreview (props) {
   const data = props.postData;
   const bcolor = data.bgColor;
   const [boardName, setBoardName] = useState('');
   const [highlightedTitle, setHighlightedTitle] = useState('');
   const [highlightedContent, setHighlightedContent] = useState('');
+  const [showReport, setShowReport] = useState(false);
+  const handleReportClose = () => setShowReport(false);
+  const handleReportShow = () => setShowReport(true);
   const navigate = useNavigate();
   useEffect(() => {
     if (data.boardName) {
@@ -23,7 +26,6 @@ function PostPreview (props) {
           if (res.success) {
             setBoardName(res.board.name);
           } else {
-            console.log(data)
             setBoardName("General");
           }
         })
@@ -44,18 +46,19 @@ function PostPreview (props) {
   }, [props.highlightQuery, data.title, data.content]);
 
   const handleClick = (e) => {
-      if (e.target.className == "ellipsis" || e.target.className == "dd-toggle" || e.target.className == "dd-item") {
+      if (e.target.className === "ellipsis" || e.target.className === "dd-toggle" || e.target.className === "dd-item") {
           return;
       } else {
           navigate(`/thread/${data._id}`);
       }
   };
   return (
+    <>
     <div className="post-link" onClick={handleClick}>
       <div className="post" style={{ backgroundColor: `${bcolor}` }}>
         <div className='flex-row'>
           <p className="category">{data.category}</p>
-          <ContentDropdown dataId={data._id} isPost={true}/>
+          <ContentDropdown dataId={data._id} isPost={true} handleReportOpen={handleReportShow}/>
         </div>
         {parsePostContent(highlightedTitle, props.highlightQuery, "title")}
         <p className='boardName'>{boardName}</p>
@@ -63,6 +66,9 @@ function PostPreview (props) {
         {parsePostContent(highlightedContent, props.highlightQuery, "content", data.type==="image")}
       </div>
     </div>
+    <CreateReport show={showReport} dataId={data._id} isPost={true} handleClose={handleReportClose}/>
+    </>
+
   );
 }
 
