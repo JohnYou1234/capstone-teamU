@@ -8,6 +8,7 @@ function Signup({ handleSwitch }) {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [errors, setErrors] = useState({});
+    const [feedback, setFeedback] = useState('');
     const handleSignupSubmit = async (e) => {
       e.preventDefault();
       if (validateFields()) {
@@ -57,10 +58,18 @@ function Signup({ handleSwitch }) {
           console.error(error);
       }
   };
-    const handleEmailChange = (e) => {
-      
-      setNetId(e.target.value)
-      };
+  const handleEmailChange = (e) => {
+    const input = e.target.value;
+    const regex = /^[a-zA-Z0-9]*$/; // A regular expression to match letters and numbers only
+  
+    if (regex.test(input)) { // If the input consists of only letters and numbers
+      setNetId(input);
+    } else {
+      setFeedback("NetID must be alphanumeric");
+      setTimeout(() => setFeedback(''), 1500);
+    }
+  };
+  
       
     const [isVerifying, setIsVerifying] = useState(false);
     const [verificationCode, setVerificationCode] = useState('');
@@ -109,6 +118,7 @@ function Signup({ handleSwitch }) {
             @uw.edu
           </Form.Label>
           </Col>
+          <p className='error'>{feedback}</p>
       </Form.Group>
         <Form.Group controlId="formBasicPassword" className="m-bottom">
             <Form.Label>Password</Form.Label>
