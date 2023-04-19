@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import './AuthModal.css';
-
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 function Signup({ handleSwitch }) {
     const [netId, setNetId] = useState('');
     const [password, setPassword] = useState('');
@@ -57,6 +58,7 @@ function Signup({ handleSwitch }) {
       }
   };
     const handleEmailChange = (e) => {
+      
       setNetId(e.target.value)
       };
       
@@ -93,17 +95,21 @@ function Signup({ handleSwitch }) {
       {!isVerifying ? 
       <Modal.Body>
         <Form onSubmit={handleSignupSubmit}>
-        <Form.Group controlId="formBasicEmail" className="m-bottom">
-            <Form.Label>Enter your UW NetID</Form.Label>
+        <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
+          <Col sm="10">
             <Form.Control
-                type="text"
-                placeholder="Enter UW NetID"
-                value={netId}
-                onChange={handleEmailChange}
-            />
-            {errors.email && <div className="error-text">{errors.email}</div>}
-        </Form.Group>
-
+                  type="text"
+                  placeholder="Enter UW NetID"
+                  value={netId}
+                  onChange={handleEmailChange}
+              />
+          </Col>
+          <Col sm="2">
+          <Form.Label>
+            @uw.edu
+          </Form.Label>
+          </Col>
+      </Form.Group>
         <Form.Group controlId="formBasicPassword" className="m-bottom">
             <Form.Label>Password</Form.Label>
             <Form.Control
@@ -136,7 +142,7 @@ function Signup({ handleSwitch }) {
         </Form>
         <div className='vert-center'>
           <div className="auth-modal-switch">
-            Already have an account? <a onClick={handleSwitch}>Login</a>
+            Already have an account? <a className='false-link' onClick={handleSwitch}>Login</a>
           </div>
         </div>
       </Modal.Body>
