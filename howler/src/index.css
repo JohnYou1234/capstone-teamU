@@ -48,3 +48,23 @@ h3 {
   display: flex;
   flex-direction: row;
 }
+
+/* Define a class for styling the paragraph like a link */
+.false-link {
+  color: #007bff; /* You can change this to the desired link color */
+  cursor: pointer;
+  text-decoration: underline;
+  margin: 0; /* Remove default margin */
+  padding: 0;
+  display: inline; 
+}
+
+/* Change the color when the paragraph is hovered */
+.false-link:hover {
+  color: #0056b3; /* You can change this to the desired hover color */
+}
+
+/* Change the color when the paragraph is active (clicked) */
+.false-link:active {
+  color: #004085; /* You can change this to the desired active color */
+}

@@ -92,7 +92,7 @@ function Login({ handleSwitch }, props) {
             </div>
 
             <div className="login-modal-sign-up">
-            Don't have an account? <a onClick={handleSwitch}>Sign up</a>
+            Don't have an account? <a className='false-link' onClick={handleSwitch}>Sign up</a>
             </div>
         </div>
       </Modal.Body>

@@ -7,13 +7,18 @@ function CreateReport({ show, handleClose, dataId, isPost }) {
   const [selected, setSelected] = useState(-1);
   const [reportText, setReportText] = useState('');
   const [feedback, setFeedback] = useState('');
+  const [disabled , setDisabled] = useState(false);
   const handleReportSubmit = (e) => {
     e.preventDefault();
+    setDisabled(true);
     setFeedback('Your report has been submitted, thank you!');
     setTimeout(() => {
       setFeedback('')
       handleClose();
-    }, 3000);
+      setDisabled(false);
+      setSelected(-1);
+      setReportText('');
+    }, 1500);
   };
 
   return (
@@ -43,7 +48,7 @@ function CreateReport({ show, handleClose, dataId, isPost }) {
             </Form.Group>
             <div className="center-col">
               <p className='error'>{feedback}</p>
-              <Button className='reportBtn' variant="primary" type="submit">
+              <Button disabled={disabled} className='reportBtn' variant="primary" type="submit">
                 Submit Report
               </Button>
             </div>

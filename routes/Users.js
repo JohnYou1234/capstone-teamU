@@ -108,7 +108,7 @@ router.post('/save/post', async (req, res) => {
   const userId = req.body.userId;
   const dataId = req.body.dataId;
   const User = req.db.User;
-
+  console.log(userId);
   try {
     const user = await User.findById(userId);
     if (!user) {

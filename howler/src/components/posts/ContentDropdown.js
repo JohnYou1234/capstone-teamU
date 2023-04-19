@@ -1,9 +1,9 @@
 import { useState, useContext, useEffect } from 'react';
 import './ContentDropdown.css';
 import AuthContext from '../../AuthContext';
-function ContentDropdown({ dataId, isPost, userId, handleReportOpen }) {
+function ContentDropdown({ dataId, isPost, handleReportOpen }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const { isLoggedIn, setShowAuthModal } = useContext(AuthContext);
+  const { isLoggedIn, setShowAuthModal, userId } = useContext(AuthContext);
   const [isSaved, setIsSaved] = useState(false);
   const handleSave = async () => {
     if (!isLoggedIn) {

@@ -122,7 +122,7 @@ function ViewProfile() {
             ) : (
               filteredComments.map((comment, index) => (
                 <Link key={index} className="unstyled-link" to={`/thread/${comment.post}`}>
-                  <Comment comment={comment} index={index} />
+                  <Comment comment={comment} index={index} isLink />
                 </Link>
               ))
             )}
