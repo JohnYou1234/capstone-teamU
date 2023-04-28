@@ -9,6 +9,7 @@ import CommentRouter from './routes/Comments.js';
 import BoardRouter from './routes/Boards.js';
 import UserRouter from './routes/Users.js';
 import ReportRouter from './routes/Report.js';
+import PollRouter from './routes/Polls.js';
 const app = express();
 const PORT = process.env.PORT || 3080;
 app.use(express.json());
@@ -26,6 +27,7 @@ app.use('/api/comments', CommentRouter);
 app.use('/api/boards', BoardRouter);
 app.use('/api/users', UserRouter);
 app.use('/api/report', ReportRouter);
+app.use('/api/polls', PollRouter);
 app.use(express.static(path.resolve(__dirname, './howler/build')));
 app.listen(PORT, () => {
     console.log(`Server listening on the port::${PORT}`);

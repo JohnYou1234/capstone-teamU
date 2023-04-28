@@ -87,12 +87,8 @@ function Login({ handleSwitch }, props) {
         </div>}
         </Form>
         <div className='vert-center'>
-            <div className="login-modal-forgot-password">
-            <a href="#">Forgot your password?</a>
-            </div>
-
             <div className="login-modal-sign-up">
-            Don't have an account? <a className='false-link' onClick={handleSwitch}>Sign up</a>
+            Don't have an account? <p className='false-link' onClick={handleSwitch}>Sign up</p>
             </div>
         </div>
       </Modal.Body>

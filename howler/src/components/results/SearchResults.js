@@ -38,7 +38,7 @@ function SearchResults() {
           .then((data) => setPosts(data.posts))
           .catch((err) => console.log(err))
           .finally(() => setLoading(false));
-      } else if (activeTab === 'Boards') {
+      } else if (activeTab === 'Packs') {
         fetchData(`/api/boards/search?q=${query}`)
           .then((data) => setBoards(data.boards))
           .catch((err) => console.log(err))
@@ -99,7 +99,7 @@ function SearchResults() {
       {activeTab === 'Posts' && (
         <>
           <h3>Posts</h3>
-          {filteredPosts.length === 0 && isLoading && <div className='center-div'><Spinner animation="border" /></div>}
+          {filteredPosts.length !== 0 && isLoading && <div className='center-div'><Spinner animation="border" /></div>}
           {filteredPosts.length !== 0 && filteredPosts.map((post, index) => (
             <PostPreview key={index} postData={post} highlightQuery={query} />
           ))}
@@ -109,7 +109,7 @@ function SearchResults() {
       {activeTab === 'Comments' && (
         <>
           <h3>Comments</h3>
-          {filteredComments.length === 0 && isLoading && <div className='center-div'><Spinner animation="border" /></div>}
+          {filteredComments.length !== 0 && isLoading && <div className='center-div'><Spinner animation="border" /></div>}
           {filteredComments.length !== 0 && filteredComments.map((comment, index) => (
             <Link key={index} className="unstyled-link" to={`/thread/${comment.post}`}>
               <Comment comment={comment} index={index} highlightQuery={query} />
@@ -118,10 +118,10 @@ function SearchResults() {
           {filteredComments.length === 0 && !isLoading && <p>No comments found</p>}
         </>
       )}
-      {activeTab === 'Boards' && (
+      {activeTab === 'Packs' && (
         <>
-          <h3>Boards</h3>
-          {boards.length === 0 && isLoading && <div className='center-div'><Spinner animation="border" /></div>}
+          <h3>Packs</h3>
+          {boards.length !== 0 && isLoading && <div className='center-div'><Spinner animation="border" /></div>}
           {boards.length !== 0 && boards.map((board, index) => (
             <Link key={index} className="unstyled-link" to={`/board/${board._id}`}>
               <div className="board" key={index}>

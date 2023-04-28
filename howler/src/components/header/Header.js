@@ -25,7 +25,7 @@ function Header() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto">
               <Nav.Item>
-                <span onClick={openList} className="nav-link">Boards</span>
+                <span onClick={openList} className="nav-link">Packs</span>
               </Nav.Item>
               <Nav.Item className='d-flex align-items-center'>
                 <SearchBar />

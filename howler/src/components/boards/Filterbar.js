@@ -9,7 +9,7 @@ function FilterBar(props) {
   return (
     <input 
       type={'text'} 
-      placeholder={'Filter Boards'} 
+      placeholder={'Filter Packs'} 
       className={'boardFilterBar'} 
       value={props.filterText} 
       onChange={handleFilterChange}

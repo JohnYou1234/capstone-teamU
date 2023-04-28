@@ -18,7 +18,7 @@ function BoardSelect(props) {
     return (
         <div>
             <select name="board" className="create-post-input" value={board} onChange={handleBoardChange}>
-                <option disabled>Select a board</option>
+                <option value=''>General</option>
                 {boards.map(board => {
                     return (
                         <option key={board._id} value={board._id + "," + board.name}>{board.name}</option>

@@ -19,7 +19,7 @@ function Tab({ name, active, onClick }) {
   );
 }
 function Tabs({ activeTab, handleTabClick, noBoard }) {
-  let categories = ["Posts", "Comments", "Boards"];
+  let categories = ["Posts", "Comments", "Packs"];
   if (noBoard) categories = ["Posts", "Comments"]
 
   return (

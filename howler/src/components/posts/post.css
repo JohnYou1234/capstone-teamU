@@ -15,6 +15,7 @@
     position: relative;
     align-self: center;
     pointer-events: auto;
+    word-break: break-word;
 }
 
 .post-link {

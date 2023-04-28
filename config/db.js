@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-// import env from './env.js';
 import dotenv from 'dotenv';
 dotenv.config();
 // Connect to database
@@ -19,7 +18,8 @@ async function dbConnect() {
         type: { type: String, default: 'text' },
         board: { type: mongoose.Schema.Types.ObjectId, ref: 'Board' },
         boardName: String,
-        date: { type: Date, default: Date.now }
+        date: { type: Date, default: Date.now },
+        pollId: { type: mongoose.Schema.Types.ObjectId, ref: 'Poll' }
     });   
 
     const CommentSchema = new mongoose.Schema({
@@ -58,12 +58,45 @@ async function dbConnect() {
         comment: { type: mongoose.Schema.Types.ObjectId, ref: 'Comment' },
         user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
     });
+    const PollSchema = new mongoose.Schema({
+        question: {
+          type: String,
+          required: true
+        },
+        options: {
+          type: [String],
+          validate: [options => options.length >= 2, 'Poll must have at least two options']
+        },
+        votes: {
+          type: [Number],
+          default: function () {
+            return Array(this.options.length).fill(0);
+          }
+        },
+        author: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'User',
+          required: true
+        },
+        voters: {
+          type: Map,
+          of: Number,
+          default: {}
+        },
+        createdAt: {
+          type: Date,
+          default: Date.now
+        }
+      });
+      
+      
     db.User = mongoose.model('User', UserSchema);
     db.Verification = mongoose.model('Verification', VerificationSchema);
     db.Post = mongoose.model('Post', PostSchema);
     db.Comment = mongoose.model('Comment', CommentSchema);
     db.Board = mongoose.model('Board', BoardSchema);
     db.Report = mongoose.model('Report', ReportSchema);
+    db.Poll = mongoose.model('Poll', PollSchema);
     console.log("Created DB Schemas and Models");
 }
 

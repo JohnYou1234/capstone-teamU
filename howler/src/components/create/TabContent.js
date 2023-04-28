@@ -1,5 +1,6 @@
 import React from 'react';
 import './create.css';
+import CreatePoll from './CreatePoll';
 function TabContent(props) {
     const tab = props.tab;
     const setImageLink = props.setImageLink;
@@ -13,6 +14,13 @@ function TabContent(props) {
     const handlePostChange = (event) => {
         setPostText(event.target.value);
     };
+
+    const pollOptions = props.pollOptions;
+    const setPollOptions = props.setPollOptions;
+    const pollQuestion = props.pollQuestion;
+    const setPollQuestion = props.setPollQuestion;
+    
+
     switch (tab) {
         case 'text':
           return (
@@ -24,7 +32,7 @@ function TabContent(props) {
           );
         case 'poll':
           return (
-              <p>Not implemented yet</p>
+              <CreatePoll pollOptions={pollOptions} setPollOptions={setPollOptions} pollQuestion={pollQuestion} setPollQuestion={setPollQuestion} />
           )
         default:
           return null;
