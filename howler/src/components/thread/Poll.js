@@ -61,7 +61,6 @@ function Poll({ pollId }) {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         setPollData(data);
         setRefresh(!refresh);
       })
