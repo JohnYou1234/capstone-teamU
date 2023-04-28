@@ -1,6 +1,5 @@
 import { formatDate } from "../../helpers.js";
 import ContentDropdown from '../posts/ContentDropdown';
-import './Comment.css';
 import CreateReport from '../Report/CreateReport';
 import { useState } from "react";
 function Comment ({ comment, index, highlightQuery, first, isLink }) {

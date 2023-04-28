@@ -70,6 +70,7 @@ app.post('/create', async function (req, res) {
 
     } catch {
         (err) => {
+            console.log(err);
             res.send({
                 "success": false,
                 "message": "Error creating post",

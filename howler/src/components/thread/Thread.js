@@ -10,6 +10,7 @@ import { Spinner } from 'react-bootstrap';
 import AuthContext from '../../AuthContext';
 import ContentDropdown from '../posts/ContentDropdown';
 import CreateReport from '../Report/CreateReport';
+import Poll from './Poll.js';
 function Thread() {
     const {isLoggedIn, userId} = useContext(AuthContext);
     const [showReport, setShowReport] = useState(false);
@@ -67,7 +68,10 @@ function Thread() {
                         <AiOutlineClose /> Close
                     </Link>
                     <div className="thread-post" style={{ backgroundColor: `${post.bgColor}`}} >
-                        <ContentDropdown dataId={postId} isPost={true} handleReportOpen={handleReportShow}/>
+                        <div className='flex-row'>
+                            <p className="category">{post.category}</p>
+                            <ContentDropdown dataId={post._id} isPost={true} handleReportOpen={handleReportShow}/>
+                        </div>
                         <div className="thread-post-header">
                             <h2>{post.title}</h2>
                             <p>{boardName}</p>
@@ -90,6 +94,8 @@ function Thread() {
 function parsePostContent(data) {
     if (data.type === "image") {
         return <img className="post-img" src={data.content} alt="post content"/>;
+    } else if (data.type === "poll") {
+        return <Poll pollId={data.pollId}/>
     } else {
         return <p className="content">{data.content}</p>;
     }

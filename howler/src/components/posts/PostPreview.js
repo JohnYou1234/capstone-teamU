@@ -4,6 +4,7 @@ import {formatDate} from '../../helpers.js';
 import { useEffect, useState } from 'react';
 import ContentDropdown from './ContentDropdown';
 import CreateReport from '../Report/CreateReport';
+import PollPreview from './PollPreview'
 function PostPreview (props) {
   const data = props.postData;
   const bcolor = data.bgColor;
@@ -60,10 +61,11 @@ function PostPreview (props) {
           <p className="category">{data.category}</p>
           <ContentDropdown dataId={data._id} isPost={true} handleReportOpen={handleReportShow}/>
         </div>
+        {}
         {parsePostContent(highlightedTitle, props.highlightQuery, "title")}
         <p className='boardName'>{boardName}</p>
         <p className="date">{formatDate(data.date)}</p>
-        {parsePostContent(highlightedContent, props.highlightQuery, "content", data.type==="image")}
+        {parsePostContent(highlightedContent, props.highlightQuery, "content", data.type==="image", data.pollId)}
       </div>
     </div>
     <CreateReport show={showReport} dataId={data._id} isPost={true} handleClose={handleReportClose}/>
@@ -72,9 +74,12 @@ function PostPreview (props) {
   );
 }
 
-function parsePostContent(content, highlightQuery, type, isImage) {
+function parsePostContent(content, highlightQuery, type, isImage, pollId) {
     if (isImage) {
         return <img className='preview-img' src={content} alt="post content" />;
+    }
+    if (pollId) {
+      return <PollPreview pollId={pollId}/>
     }
     if (highlightQuery) {
         return <p className={type} dangerouslySetInnerHTML={{ __html: highlightText(cutContentShort(content), highlightQuery) }} />;

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Offcanvas } from 'react-bootstrap';
 import { FiPlus } from 'react-icons/fi';
 import CreateBoard from './CreateBoard';
@@ -6,12 +6,22 @@ import './BoardList.css';
 import {useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import FilterBar from './Filterbar';
+import AuthContext from '../../AuthContext';
+
 function BoardList(props) {
   const showList = props.showList;
+  const { isLoggedIn, setShowAuthModal } = useContext(AuthContext);
+
   const handleClose = () => props.handleClose();
   const [showCreate, changeCreateView] = useState(false);
   const handleCreateClose = () => changeCreateView(false);
-  const handleCreateOpen = () => changeCreateView(true);
+  const handleCreateOpen = () => {
+    if (!isLoggedIn) {
+      setShowAuthModal(true);
+    } else {
+      changeCreateView(true);
+    }
+  }
 
   const [refresh, setRefresh] = useState(false);
   const [boards, setBoards] = useState([]);
@@ -42,13 +52,13 @@ function BoardList(props) {
       <Offcanvas show={showList} onHide={handleClose} placement="start">
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>
-            Boards
+            Packs
           </Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           <div className='createBoard' onClick={handleCreateOpen}>
               <span><FiPlus /></span>
-              <span>Create Board</span>
+              <span>Create Pack</span>
           </div>
           {/* filter bar */}
           <FilterBar filterText={filterText} setFilterText={setFilterText}/>
