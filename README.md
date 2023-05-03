@@ -1,7 +1,7 @@
 # Howler
 This is Howler, a full stack forum application built for University of Washington students.
 For more information, visit our landing page here.
-[Landing Page Link]([https://github.com/JohnYou1234/capstone-teamU](https://johnyou1234.github.io/howler-landing-page/))
+[Landing Page Link]([https://github.com/JohnYou1234/capstone-teamU](https://johnyou1234.github.io/howler-landing-page)
 ## Setup for development
 
 1. Clone repository 
