@@ -19,8 +19,7 @@ function ViewProfile() {
   const [selectedPostType, setSelectedPostType] = useState("All");
   const handleCategorySelect = (category) => {
     setSelectedCategory(category);
-  };
-  
+  }
   const handlePostTypeSelect = (postType) => {
     setSelectedPostType(postType);
   };
