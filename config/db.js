@@ -1,7 +1,10 @@
 import mongoose from 'mongoose';
 // Connect to database
+import dotenv from 'dotenv';
+dotenv.config();
 dbConnect().catch((err) => console.log(err));
 let db = {}
+
 // Connect to MongoDB
 async function dbConnect() {
     await mongoose.connect(process.env.MONGODB_URL)

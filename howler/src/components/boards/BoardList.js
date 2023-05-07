@@ -33,9 +33,10 @@ function BoardList(props) {
       if (res.status !== 200) {
         throw new Error('Error loading boards');
       }
-      return res.json()
+      return res.text()
     })
     .then(data => {
+      console.log(data);
       if (data.success) {
         setBoards(data.boards)
       } else {
